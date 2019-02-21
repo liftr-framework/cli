@@ -19,7 +19,7 @@
     "build": "tsc -p .",
     "clean": "rm -rf ./lib",
     "copy-templates": "cp -a templates/. lib/templates/",
-    "test": "sudo npm i -g && liftr",
+    "test": "npm i -g && liftr",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
   },
   "dependencies": {

@@ -37,8 +37,8 @@ export const createSetup = async (setupName: string) => {
     const setupApp = process.cwd() + `/${setupName}/src/app.ts`;
     const setupConfig = process.cwd() + `/${setupName}/tsconfig.json`;
 
-    const scaffoldProject = util.promisify(createExampleApi);
-    scaffoldProject(setupName, spinner)
+    const liftrProject = util.promisify(createExampleApi);
+    liftrProject(setupName, spinner)
         .then(createConfig(setupConfig))
         .then(createServer(setupServer))
         .then(createApp(setupApp))

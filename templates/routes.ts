@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ScaffoldRoute } from '@routes/scaffold.route'
+import { LiftrRoute } from '@routes/liftr.route'
 
 interface AppRouter {
   path: string;
@@ -9,7 +9,7 @@ interface AppRouter {
 
 export const routes: AppRouter[] = [
   {
-    handler: ScaffoldRoute,
+    handler: LiftrRoute,
     middleware: [],
     path: '/',
   },

@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction} from "express"
-import { ScaffoldController } from "@controllers/scaffold.controller"
+import { LiftrController } from "@controllers/liftr.controller"
 
-export const ScaffoldRoute: Router = Router()
-  .get('/', ScaffoldController);
+export const LiftrRoute: Router = Router()
+  .get('/', LiftrController);
