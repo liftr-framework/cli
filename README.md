@@ -4,7 +4,7 @@
 [![npmlicense](https://img.shields.io/npm/l/liftr.svg)](https://github.com/farisT/liftr/blob/master/LICENSE/)
 [![downloads](https://img.shields.io/npm/dy/liftr.svg)](https://github.com/farisT/liftr)
 
-Liftr is a quick project-starter/pseudo-framework CLI that will create the necessary files for you to begin a Nodejs with Typescript project.
+Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https://expressjs.com/), that will create the necessary files for you to begin a Nodejs with Typescript project.
 
 ## Quickstart
 
