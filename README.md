@@ -1,5 +1,9 @@
 # Liftr
 
+[![npmversion](https://img.shields.io/npm/v/liftr.svg)](https://github.com/farisT/liftr)
+[![npmlicense](https://img.shields.io/npm/l/liftr.svg)](https://github.com/farisT/liftr/blob/master/LICENSE/)
+[![downloads](https://img.shields.io/npm/dy/liftr.svg)](https://github.com/farisT/liftr)
+
 Liftr is a quick project-starter/pseudo-framework CLI that will create the necessary files for you to begin a Nodejs with Typescript project.
 
 ## Quickstart
@@ -46,3 +50,35 @@ liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
 ```
+## Contributing
+
+Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues).  
+
+First fork this project.  
+
+```shell
+git clone <your-forked-repo>
+npm install
+
+git checkout -b my-fix
+# fix some code...
+
+git commit -m "added this feature"
+git push origin my-fix
+```
+
+Lastly, open a pull request on Github.
+
+The following npm script are available
+
+- `npm start` - create build, install globally and run liftr
+- `npm run build` - create build
+- `npm run test` - install globally and run liftr
+- `npm run link-upstream` - add remote
+- `npm run sync` - fetch, checkout, merge and push
+- `npm run copy-templates` - Moves templates to ./lib/templates
+- `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.
+
+## License
+
+[![npmlicense](https://img.shields.io/npm/l/liftr.svg)](https://github.com/farisT/liftr/blob/master/LICENSE/)

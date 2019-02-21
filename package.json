@@ -14,13 +14,14 @@
     "nodejs"
   ],
   "scripts": {
-    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "create": "npm run build && npm run copy-templates && npm run test",
+    "start": "npm run build && npm run copy-templates && npm run test",
     "build": "tsc -p .",
+    "link-upstream": "git remote add upstream https://github.com/farisT/liftr",
+    "sync": "git fetch origin && git checkout master && git pull && git checkout <your-branch> && git merge master && git push",
     "clean": "rm -rf ./lib",
     "copy-templates": "cp -a templates/. lib/templates/",
     "test": "npm i -g && liftr",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
+    "refresh": "rm -rf ./node_modules ./package-lock.json && clean && npm install"
   },
   "dependencies": {
     "@types/fs-extra": "^5.0.4",
