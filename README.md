@@ -19,7 +19,7 @@ This should setup a project with all the necessary folders and files so that you
 
 ### Commands
 
-Here are all the possibilities with liftr
+Here are all the possibilities with Liftr
 
 ```shell
   _       _    __   _          
@@ -33,15 +33,15 @@ Here are all the possibilities with liftr
 liftr -s <your-project-name>
 liftr --setup <your-project-name>
 
-# Adds a route to the routes folder and to the routing module
+# Create a route to the routes folder and add it to the routing module
 liftr -r <your-route-name>
 liftr --route <your-route-name>
 
-# Add a controller
+# Create a controller in the controller folder
 liftr -c <your-controller-name>
 liftr --controller <your-controller-name>
 
-# Add a middleware
+# Create a middleware in the middleware folder
 liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
