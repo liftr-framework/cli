@@ -25,13 +25,13 @@ This should setup a project with all the necessary folders and files so that you
 
 Here are all the possibilities with Liftr
 
-```shell
+```
   _       _    __   _          
  | |     (_)  / _| | |_   _ __ 
  | |     | | | |_  | __| | '__|
  | |___  | | |  _| | |_  | |   
  |_____| |_| |_|    \__| |_|   
-
+ 
 
 # Create a setup for your Nodejs/Typescript project
 liftr -s <your-project-name>
