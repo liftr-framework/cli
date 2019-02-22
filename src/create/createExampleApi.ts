@@ -1,14 +1,14 @@
 import fs from 'fs-extra';
 import * as path from 'path';
 
-export const createExampleApi = async (setupName: string, spinner: any) => {
+export const createExampleApi = async (setupName: string) => {
     const fileContent = null;
-    const RoutePath = process.cwd() + `/${setupName}/src/routes/liftr.route.ts`;
-    const ControllerPath = process.cwd() + `/${setupName}/src/controllers/liftr.controller.ts`;
-    const MiddleWarePath = process.cwd() + `/${setupName}/src/middleware/liftr.middleware.ts`;
-    const RoutingPath = process.cwd() +  `/${setupName}/src/routes/index.ts`;
+    const RoutePath: string = process.cwd() + `/${setupName}/src/routes/liftr.route.ts`;
+    const ControllerPath: string = process.cwd() + `/${setupName}/src/controllers/liftr.controller.ts`;
+    const MiddleWarePath: string = process.cwd() + `/${setupName}/src/middleware/liftr.middleware.ts`;
+    const RoutingPath: string = process.cwd() +  `/${setupName}/src/routes/index.ts`;
 
-    const creationArray = [
+    const creationArray: string[] = [
         RoutePath,
         ControllerPath,
         RoutingPath,

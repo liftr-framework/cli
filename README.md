@@ -10,12 +10,12 @@ Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https:
 
 Install Liftr as a global CLI.
 
- ``` 
- npm install -g liftr 
- ```
-You then run
+```shell
+ npm install -g liftr
 
-```
+cd <your-repo-location>
+
+# Then you run
 liftr -s <name-of-your-project>
 ```
 
@@ -25,13 +25,7 @@ This should setup a project with all the necessary folders and files so that you
 
 Here are all the possibilities with Liftr
 
-```
-  _       _    __   _          
- | |     (_)  / _| | |_   _ __ 
- | |     | | | |_  | __| | '__|
- | |___  | | |  _| | |_  | |   
- |_____| |_| |_|    \__| |_|   
- 
+```shell
 
 # Create a setup for your Nodejs/Typescript project
 liftr -s <your-project-name>
@@ -50,6 +44,7 @@ liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
 ```
+
 ## Contributing
 
 Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues).  
@@ -73,11 +68,13 @@ The following npm script are available
 
 - `npm start` - create build, install globally and run liftr
 - `npm run build` - create build
-- `npm run test` - install globally and run liftr
+- `npm run global` - install globally and run liftr
 - `npm run link-upstream` - add remote
 - `npm run sync` - fetch, checkout, merge and push
 - `npm run copy-templates` - Moves templates to ./lib/templates
 - `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.
+- `npm run tscov` - checks the type coverage of your project with tscov
+- `npm run tscov:d` - shows all uncovered types with tscov
 
 ## License
 

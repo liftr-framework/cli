@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 
 export const createApp = (setupFilepath: string) => {
-    const fileContent = `import * as express from 'express';
+    const fileContent: string = `import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { routes } from '@routes/index';
 
@@ -14,7 +14,7 @@ routes.forEach((route) => app.use(route.path, route.middleware, route.handler));
 
 export default app;
 `;
-    let filepath;
+    let filepath: string;
     if (setupFilepath) {
         filepath = setupFilepath;
     } else {
