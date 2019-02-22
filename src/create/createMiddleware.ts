@@ -5,12 +5,11 @@ export const createMiddleware = (MiddlewareName: string) => {
 import { Request, Response, NextFunction } from 'express';
 
 export const ${MiddlewareName}Middleware = (req: Request, res: Response, next: NextFunction) => {
-            return next();
-        };
+    return next();
+};
 `;
-    const filepath = process.cwd() + `/${MiddlewareName}.middleware.ts`;
+    const filepath = process.cwd() + `/src/middleware/${MiddlewareName}.middleware.ts`;
     fs.writeFile(filepath, fileContent, (err) => {
             if (err) throw err;
-            console.log('The file was succesfully saved!');
     });
 };

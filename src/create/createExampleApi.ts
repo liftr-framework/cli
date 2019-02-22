@@ -5,12 +5,14 @@ export const createExampleApi = async (setupName: string, spinner: any) => {
     const fileContent = null;
     const RoutePath = process.cwd() + `/${setupName}/src/routes/liftr.route.ts`;
     const ControllerPath = process.cwd() + `/${setupName}/src/controllers/liftr.controller.ts`;
+    const MiddleWarePath = process.cwd() + `/${setupName}/src/middleware/liftr.middleware.ts`;
     const RoutingPath = process.cwd() +  `/${setupName}/src/routes/index.ts`;
 
     const creationArray = [
         RoutePath,
         ControllerPath,
         RoutingPath,
+        MiddleWarePath,
     ];
     await creationArray.forEach(async (createPath) => {
         await fs.writeFile(createPath, fileContent, (err) => {
@@ -24,6 +26,9 @@ export const createExampleApi = async (setupName: string, spinner: any) => {
         }
         if (createPath.includes('liftr.controller.ts')) {
             await fs.copySync(path.resolve(__dirname, '../templates/controller.ts'), createPath);
+        }
+        if (createPath.includes('liftr.middleware.ts')) {
+            await fs.copySync(path.resolve(__dirname, '../templates/middleware.ts'), createPath);
         }
     });
 };
