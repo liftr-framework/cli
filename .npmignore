@@ -1,0 +1,11 @@
+# Relevant files
+!lib/**
+
+## Unrelevant files
+src/**
+.gitignore
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+package-lock.json
+tsconfig.json
+tslint.json
