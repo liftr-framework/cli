@@ -6,9 +6,10 @@ import { createServer } from './createServer';
 import { dependencies } from './dependencies';
 import { createConfig } from './createConfig';
 import { createExampleApi } from './createExampleApi';
+import { Spinner } from '../types/spinner.type';
 
 export const createSetup = async (setupName: string) => {
-    const spinner = ora('Setting up Scaffold project').start();
+    const spinner: Spinner = ora('Setting up Scaffold project').start();
     spinner.spinner = 'moon';
     let timeout: any;
 
@@ -33,11 +34,11 @@ export const createSetup = async (setupName: string) => {
     if (!fs.existsSync(process.cwd() + `/${setupName}/src`)) {
         await fs.mkdirSync(process.cwd() + `/${setupName}/src`);
     }
-    const setupServer = process.cwd() + `/${setupName}/src/server.ts`;
-    const setupApp = process.cwd() + `/${setupName}/src/app.ts`;
-    const setupConfig = process.cwd() + `/${setupName}/tsconfig.json`;
+    const setupServer: string = process.cwd() + `/${setupName}/src/server.ts`;
+    const setupApp: string = process.cwd() + `/${setupName}/src/app.ts`;
+    const setupConfig: string = process.cwd() + `/${setupName}/tsconfig.json`;
 
-    const liftrProject = util.promisify(createExampleApi);
+    const liftrProject: any = util.promisify(createExampleApi);
     liftrProject(setupName, spinner)
         .then(createConfig(setupConfig))
         .then(createServer(setupServer))

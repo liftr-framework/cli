@@ -1,10 +1,11 @@
 import fs from 'fs-extra';
+import { Spinner } from '../types/spinner.type';
 const { exec } = require('child_process');
 
-export const dependencies = async (setupName: string, spinner: any) => {
+export const dependencies = async (setupName: string, spinner: Spinner) => {
     const setupPackageJson = process.cwd() + `/${setupName}/package.json`;
 
-    const packageJson =  () => {
+    const packageJson: () => void =  () => {
         const fileContent = `
         {
             "name": "${setupName}",

@@ -3,7 +3,7 @@ import * as path from 'path';
 
 export const createConfig = (setupFilepath: string) => {
     const fileContent = null;
-    let filepath;
+    let filepath: string;
     if (setupFilepath) {
         filepath = setupFilepath;
     } else {

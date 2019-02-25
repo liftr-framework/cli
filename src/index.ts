@@ -16,19 +16,19 @@ console.log(
 
 program
     .description('A CLI for scaffolding Node/Typescript projects quick')
-    .option('-r , --route, create a route file')
-    .option('-c , --controller, create a controller file')
-    .option('-m , --middleware, create a middleware file')
-    .option('-s, --setup, create a standard dev setup for Nodejs / Typescript')
+    .option('-r , --route', 'create a route file')
+    .option('-c , --controller', 'create a controller file')
+    .option('-m , --middleware', 'create a middleware file')
+    .option('-s, --setup', 'create a standard dev setup for Nodejs / Typescript')
     .version(packageJson.version)
     .parse(process.argv);
 
-const argv = minimist(process.argv.slice(2), { '--': true });
+const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), { '--': true });
 
-const RouteName = argv.route || argv.r;
-const ControllerName = argv.controller || argv.c;
-const MiddlewareName = argv.middleware || argv.m;
-const SetupName = argv.setup || argv.s;
+const RouteName: string = argv.route || argv.r;
+const ControllerName: string = argv.controller || argv.c;
+const MiddlewareName: string = argv.middleware || argv.m;
+const SetupName: string = argv.setup || argv.s;
 
 if (SetupName) createSetup(SetupName);
 

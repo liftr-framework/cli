@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 
 export const createController = (ControllerName: string) => {
-    const fileContent = `
+    const fileContent: string = `
 import { Request, Response } from 'express';
 
 export let ${ControllerName}Controller = (req: Request, res: Response) => {
@@ -9,7 +9,7 @@ export let ${ControllerName}Controller = (req: Request, res: Response) => {
         res.send('${ControllerName} route');
     };
 `;
-    const filepath = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
+    const filepath: string = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
     fs.writeFile(filepath, fileContent, (err) => {
         if (err) throw err;
     });

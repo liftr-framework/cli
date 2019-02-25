@@ -13,7 +13,7 @@ const server = app.listen(app.get('port'), () => {
 
 export default server;
     `;
-    let filepath;
+    let filepath: string;
     if (setupFilepath) {
         filepath = setupFilepath;
     } else {

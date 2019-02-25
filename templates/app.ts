@@ -7,6 +7,6 @@ const app = express();
 dotenv.config();
 app.set('port', process.env.PORT || 4000);
 
-routes.forEach((route) => app.use(route.path, route.middleware, route.handler));
+routes.forEach((route: any) => app.use(route.path, route.middleware, route.handler));
 
 export default app;
