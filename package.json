@@ -1,6 +1,6 @@
 {
   "name": "liftr",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A scaffolding CLI for Node.js/Typescript API's",
   "author": "Faris Tangastani",
   "license": "ISC",
