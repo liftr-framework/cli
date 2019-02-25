@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 export const createApp = (setupFilepath: string) => {
     const fileContent: string = `import * as express from 'express';
 import * as dotenv from 'dotenv';
+import { AppRouter } from '@routes/index';
 import { routes } from '@routes/index';
 
 const app = express();
@@ -10,7 +11,7 @@ const app = express();
 dotenv.config();
 app.set('port', process.env.PORT || 4000);
 
-routes.forEach((route) => app.use(route.path, route.middleware, route.handler));
+routes.forEach((route: AppRouter) => app.use(route.path, route.middleware, route.handler));
 
 export default app;
 `;

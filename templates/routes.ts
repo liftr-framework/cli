@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { LiftrRoute } from '@routes/liftr.route'
 
-interface AppRouter {
+export interface AppRouter {
   path: string;
   middleware: any[];
   handler: Router;
