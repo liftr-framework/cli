@@ -1,7 +1,7 @@
 {
   "name": "liftr",
-  "version": "1.2.0",
-  "description": "A scaffolding CLI for Node.js/Typescript API's",
+  "version": "1.2.1",
+  "description": "A scaffolding CLI for Node.js/Typescript API's and Projects",
   "author": "Faris Tangastani",
   "license": "ISC",
   "main": "./lib/index.js",

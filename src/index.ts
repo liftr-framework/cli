@@ -37,17 +37,23 @@ if (SetupName) {
 }
 
 if (RouteName) {
+    checkName(RouteName);
     createRoute(RouteName);
     addRoute(RouteName);
-    console.log(chalk.green(`route named ${RouteName} created and added to router setup`));
+    console.log(chalk.green(`Route named ${RouteName} created and added to router setup`));
 }
 
 if (ControllerName) {
+    checkName(ControllerName);
     createController(ControllerName);
-    console.log(chalk.green(`controller named ${ControllerName} created`));
+    console.log(chalk.green(`Controller named ${ControllerName} created`));
 }
 
-if (MiddlewareName) createMiddleware(MiddlewareName);
+if (MiddlewareName) {
+    checkName(MiddlewareName);
+    createMiddleware(MiddlewareName);
+    console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
+}
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

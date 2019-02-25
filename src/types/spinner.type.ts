@@ -4,4 +4,4 @@ export type Spinner = {
     text: string;
     stop: Function;
     succeed: Function;
-}
+};
