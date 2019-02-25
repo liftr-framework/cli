@@ -4,6 +4,7 @@ import minimist from 'minimist';
 import chalk from 'chalk';
 
 import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
+import { checkName } from './helper';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -30,7 +31,10 @@ const ControllerName: string = argv.controller || argv.c;
 const MiddlewareName: string = argv.middleware || argv.m;
 const SetupName: string = argv.setup || argv.s;
 
-if (SetupName) createSetup(SetupName);
+if (SetupName) {
+    checkName(SetupName);
+    createSetup(SetupName);
+}
 
 if (RouteName) {
     createRoute(RouteName);
