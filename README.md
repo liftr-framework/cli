@@ -47,9 +47,9 @@ liftr --middleware <your-middleware-name>
 
 ## Contributing
 
-Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues).  
+Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues).
 
-First fork this project.  
+First fork this project.
 
 ```shell
 git clone <your-forked-repo>
@@ -66,15 +66,17 @@ Lastly, open a pull request on Github.
 
 The following npm script are available
 
-- `npm start` - create build, install globally and run liftr
-- `npm run build` - create build
-- `npm run global` - install globally and run liftr
-- `npm run link-upstream` - add remote
-- `npm run sync` - fetch, checkout, merge and push
-- `npm run copy-templates` - Moves templates to ./lib/templates
-- `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.
-- `npm run tscov` - checks the type coverage of your project with tscov
-- `npm run tscov:d` - shows all uncovered types with tscov
+Before you run `npm start`, make sure you didn't installed the `liftr` package globally. If you did, run `npm uninstall -g liftr` and run `npm start`, otherwise you will get an npm error.
+
+-   `npm start` - create build, install globally and run liftr
+-   `npm run build` - create build
+-   `npm run global` - install globally and run liftr
+-   `npm run link-upstream` - add remote
+-   `npm run sync` - fetch, checkout, merge and push
+-   `npm run copy-templates` - Moves templates to ./lib/templates
+-   `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.
+-   `npm run tscov` - checks the type coverage of your project with tscov
+-   `npm run tscov:d` - shows all uncovered types with tscov
 
 ## License
 
