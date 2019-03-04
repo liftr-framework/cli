@@ -7,9 +7,10 @@ import { dependencies } from './dependencies';
 import { createConfig } from './createConfig';
 import { createExampleApi } from './createExampleApi';
 import { Spinner } from '../types/spinner.type';
+import { createNodemonConfig } from './nodemon';
 
 export const createSetup = async (setupName: string) => {
-    const spinner: Spinner = ora('Setting up Scaffold project').start();
+    const spinner: Spinner = ora('Setting up Liftr project').start();
     spinner.spinner = 'moon';
     let timeout: any;
 
@@ -37,10 +38,12 @@ export const createSetup = async (setupName: string) => {
     const setupServer: string = process.cwd() + `/${setupName}/src/server.ts`;
     const setupApp: string = process.cwd() + `/${setupName}/src/app.ts`;
     const setupConfig: string = process.cwd() + `/${setupName}/tsconfig.json`;
+    const setupNodemon: string = process.cwd() + `/${setupName}/nodemon.json`;
 
     const liftrProject: any = util.promisify(createExampleApi);
     liftrProject(setupName, spinner)
         .then(createConfig(setupConfig))
+        .then(createNodemonConfig(setupNodemon))
         .then(createServer(setupServer))
         .then(createApp(setupApp))
         .then(dependencies(setupName, spinner));

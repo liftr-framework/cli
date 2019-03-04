@@ -1,7 +1,7 @@
 # Relevant files
 !lib/**
 
-## Unrelevant files
+## Irrelevant files
 src/**
 .gitignore
 CODE_OF_CONDUCT.md

@@ -11,7 +11,7 @@ Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https:
 Install Liftr as a global CLI.
 
 ```shell
- npm install -g liftr
+npm install -g liftr
 
 cd <your-repo-location>
 
@@ -64,9 +64,9 @@ git push origin my-fix
 
 Lastly, open a pull request on Github.
 
-The following npm script are available
+The following npm scripts are available
 
-Before you run `npm start`, make sure you didn't installed the `liftr` package globally. If you did, run `npm uninstall -g liftr` and run `npm start`, otherwise you will get an npm error.
+Before you run `npm start`, make sure you didn't install the `liftr` package globally. If you did, run `npm uninstall -g liftr` and run `npm start`, otherwise you will get an npm error.
 
 -   `npm start` - create build, install globally and run liftr
 -   `npm run build` - create build

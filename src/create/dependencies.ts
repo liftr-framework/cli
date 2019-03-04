@@ -1,10 +1,10 @@
-import fs from 'fs-extra'
-import { Spinner } from '../types/spinner.type'
-import chalk from 'chalk'
-const { exec } = require('child_process')
+import fs from 'fs-extra';
+import { Spinner } from '../types/spinner.type';
+import chalk from 'chalk';
+const { exec } = require('child_process');
 
 export const dependencies = async (setupName: string, spinner: Spinner) => {
-  const setupPackageJson = process.cwd() + `/${setupName}/package.json`
+  const setupPackageJson = process.cwd() + `/${setupName}/package.json`;
 
   const packageJson: () => void = () => {
     const fileContent = `
@@ -15,6 +15,7 @@ export const dependencies = async (setupName: string, spinner: Spinner) => {
             "main": "server.js",
             "scripts": {
               "start": "ts-node -r tsconfig-paths/register src/server.ts",
+              "dev": "nodemon",
               "build": "tsc -p ."
             },
             "author": "",
@@ -31,30 +32,30 @@ export const dependencies = async (setupName: string, spinner: Spinner) => {
             "nodemon": "^1.18.7"
           }
       }
-`
-    fs.writeFile(setupPackageJson, fileContent, err => {
-      if (err) throw err
-    })
-  }
+`;
+    fs.writeFile(setupPackageJson, fileContent, (err) => {
+      if (err) throw err;
+    });
+  };
   try {
-    await packageJson()
+    await packageJson();
     await exec(
       `cd ${setupName} && npm install `,
       (error: Error, stdout: string, stderr: string) => {
         if (error) {
-          console.log(error)
-          return
+          console.log(error);
+          return;
         }
-        spinner.succeed(chalk.green(`Liftr is ready! cd into ${setupName} and run npm start.`))
+        spinner.succeed(chalk.green(`Liftr is ready! cd into ${setupName} and run npm start.`));
         spinner.info(
           chalk.blue(
-            `Make sure you have installed ts-node and typscript installed on your machine.`,
+            'Make sure you have ts-node and typscript installed on your machine.',
           ),
-        )
-        spinner.warn(chalk.yellow(`If not run: "npm i -g ts-node typescript".`))
+        );
+        spinner.warn(chalk.yellow('If not run: "npm i -g ts-node typescript".'));
       },
-    )
+    );
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
