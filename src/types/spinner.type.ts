@@ -1,7 +1,9 @@
 export type Spinner = {
-    spinner: string,
-    color: string;
-    text: string;
-    stop: Function;
-    succeed: Function;
-};
+	spinner: string
+	color: string
+	text: string
+	stop: Function
+	succeed: Function
+	info: Function
+	warn: Function
+}
