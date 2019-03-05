@@ -44,6 +44,12 @@ liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
 ```
+### Supporting packages
+
+Packages that can be used in conjunction with liftr
+
+- [liftr-docs](https://github.com/farisT/liftr-docs)
+
 
 ## Contributing
 
@@ -64,9 +70,9 @@ git push origin my-fix
 
 Lastly, open a pull request on Github.
 
-The following npm scripts are available
-
 Before you run `npm start`, make sure you didn't install the `liftr` package globally. If you did, run `npm uninstall -g liftr` and run `npm start`, otherwise you will get an npm error.
+
+The following npm scripts are available
 
 -   `npm start` - create build, install globally and run liftr
 -   `npm run build` - create build
