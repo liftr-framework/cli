@@ -46,9 +46,9 @@ liftr --middleware <your-middleware-name>
 ```
 ### Supporting packages
 
-Packages that can be used in conjunction with liftr
+Packages that can be used in conjunction with liftr:
 
-- [liftr-docs](https://github.com/farisT/liftr-docs)
+- [liftr-docs](https://github.com/farisT/liftr-docs): A documentation tool for your Liftr routes with Swagger under the hood.
 
 
 ## Contributing

@@ -6,7 +6,7 @@ export const createExampleApi = async (setupName: string) => {
     const RoutePath: string = process.cwd() + `/${setupName}/src/routes/liftr.route.ts`;
     const ControllerPath: string = process.cwd() + `/${setupName}/src/controllers/liftr.controller.ts`;
     const MiddleWarePath: string = process.cwd() + `/${setupName}/src/middleware/liftr.middleware.ts`;
-    const RoutingPath: string = process.cwd() +  `/${setupName}/src/routes/index.ts`;
+    const RoutingPath: string = process.cwd() +  `/${setupName}/src/routes/LiftrRoutingModule.ts`;
 
     const creationArray: string[] = [
         RoutePath,
@@ -18,7 +18,7 @@ export const createExampleApi = async (setupName: string) => {
         await fs.writeFile(createPath, fileContent, (err) => {
             // if (err) throw err;
         });
-        if (createPath.includes('index.ts')) {
+        if (createPath.includes('LiftrRoutingModule.ts')) {
             await fs.copySync(path.resolve(__dirname, '../templates/routes.ts'), createPath);
         }
         if (createPath.includes('liftr.route.ts')) {

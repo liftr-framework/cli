@@ -3,8 +3,8 @@ import fs from 'fs-extra';
 export const createApp = (setupFilepath: string) => {
     const fileContent: string = `import * as express from 'express';
 import * as dotenv from 'dotenv';
-import { AppRouter } from '@routes/index';
-import { routes } from '@routes/index';
+import { AppRouter } from '@routes/LiftrRoutingModule';
+import { routes } from '@routes/LiftrRoutingModule';
 
 const app = express();
 

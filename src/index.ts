@@ -40,7 +40,7 @@ if (RouteName) {
     checkName(RouteName);
     createRoute(RouteName);
     addRoute(RouteName);
-    console.log(chalk.green(`Route named ${RouteName} created and added to router setup`));
+    console.log(chalk.green(`Route named ${RouteName} created and added to router module`));
 }
 
 if (ControllerName) {
