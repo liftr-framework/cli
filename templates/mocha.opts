@@ -1,0 +1,5 @@
+-r tsconfig-paths/register
+-R spec
+--recursive
+--watch-extensions ts
+ src/**/*.spec.ts

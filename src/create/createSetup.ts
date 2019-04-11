@@ -8,6 +8,8 @@ import { createConfig } from './createConfig';
 import { createExampleApi } from './createExampleApi';
 import { Spinner } from '../types/spinner.type';
 import { createNodemonConfig } from './nodemon';
+import { createTesting } from './createTesting';
+import { createUtil } from './createUtil';
 
 export const createSetup = async (setupName: string) => {
     const spinner: Spinner = ora('Setting up Liftr project').start();
@@ -43,8 +45,10 @@ export const createSetup = async (setupName: string) => {
     const liftrProject: any = util.promisify(createExampleApi);
     liftrProject(setupName, spinner)
         .then(createConfig(setupConfig))
+        .then(createUtil(setupName))
         .then(createNodemonConfig(setupNodemon))
         .then(createServer(setupServer))
         .then(createApp(setupApp))
+        .then(createTesting(setupName))
         .then(dependencies(setupName, spinner));
 };

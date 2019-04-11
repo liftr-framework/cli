@@ -1,0 +1,26 @@
+{
+  "reporter": [
+    "html",
+    "text-summary",
+    "cobertura",
+    "lcov"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "require": [
+    "ts-node/register"
+  ],
+  "sourceMap": true,
+  "instrument": true,
+  "cache": true,
+  "all": true,
+  "temp-directory": "./reports/coverage/.nyc-output",
+  "report-dir": "./reports/coverage"
+}

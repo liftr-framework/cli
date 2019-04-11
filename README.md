@@ -1,10 +1,10 @@
 # Liftr
 
-[![npmversion](https://img.shields.io/npm/v/liftr.svg)](https://github.com/farisT/liftr)
-[![npmlicense](https://img.shields.io/npm/l/liftr.svg)](https://github.com/farisT/liftr/blob/master/LICENSE/)
-[![downloads](https://img.shields.io/npm/dy/liftr.svg)](https://github.com/farisT/liftr)
+[![npmversion](https://img.shields.io/npm/v/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
+[![npmlicense](https://img.shields.io/npm/l/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
+[![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
 
-Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https://expressjs.com/), that will create the necessary files for you to begin a Nodejs with Typescript project.
+Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https://expressjs.com/), that will create the necessary files for you to begin a Node.js with Typescript project.
 
 ## Quickstart
 
@@ -31,7 +31,10 @@ Here are all the possibilities with Liftr
 liftr -s <your-project-name>
 liftr --setup <your-project-name>
 
-# Create a route to the routes folder and add it to the routing module
+# THE FOLLOWING COMMANDS CAN ONLY BE DONE IN A LIFTR SETUP
+-----------------------------------------------------------
+
+# Create a route in the routes folder and add it to the routing module
 liftr -r <your-route-name>
 liftr --route <your-route-name>
 
@@ -46,7 +49,7 @@ liftr --middleware <your-middleware-name>
 ```
 ### Supporting packages
 
-Packages that can be used in conjunction with liftr:
+Packages that can be used with liftr:
 
 - [liftr-docs](https://github.com/farisT/liftr-docs): A documentation tool for your Liftr routes with Swagger under the hood.
 
