@@ -5,8 +5,7 @@ const util = require('util');
 
 export const addRoute = (newRouteName: string) => {
     const readFile = util.promisify(fs.readFile);
-    const writeFile = util.promisify(fs.readFile);
-    readFile(process.cwd() + '/src/routes/index.ts', 'utf8')
+    readFile(process.cwd() + '/src/routes/LiftrRoutingModule.ts', 'utf8')
         .then((text: Utf8AsciiBinaryEncoding) => {
             const newtext = text;
             const position1 = text.indexOf(`
@@ -30,7 +29,7 @@ import { ${newRouteName}Route } from '@routes/${newRouteName}.route'`;
             return finalFile;
         })
         .then((content: string) => {
-            const pathToNewFile = process.cwd() + '/src/routes/index.ts';
+            const pathToNewFile = process.cwd() + '/src/routes/LiftrRoutingModule.ts';
             fs.writeFile(pathToNewFile, content, (err: Error) => {
                 if (err) throw err;
             });

@@ -1,9 +1,9 @@
 {
   "name": "liftr",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Liftr is a scaffolding CLI for Node.js/Typescript APIs and Projects",
   "author": "Faris Tangastani",
-  "license": "ISC",
+  "license": "MIT",
   "main": "./lib/index.js",
   "bin": {
     "liftr": "./lib/index.js"
