@@ -1,6 +1,6 @@
 {
   "name": "liftr",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Liftr is a scaffolding CLI for Node.js/Typescript APIs and Projects",
   "author": "Faris Tangastani",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "tscov:d": "tscov --details"
   },
   "dependencies": {
-    "@types/fs-extra": "^5.0.4",
+    "@types/fs-extra": "^5.0.5",
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
     "commander": "^2.19.0",

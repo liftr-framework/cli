@@ -4,7 +4,7 @@ import minimist from 'minimist';
 import chalk from 'chalk';
 
 import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
-import { checkName } from './helper';
+import { checkName, checkExistence } from './helpers';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -30,29 +30,38 @@ const RouteName: string = argv.route || argv.r;
 const ControllerName: string = argv.controller || argv.c;
 const MiddlewareName: string = argv.middleware || argv.m;
 const SetupName: string = argv.setup || argv.s;
+const projectCheck = checkExistence('/src/routes/LiftrRoutingModule.ts');
 
 if (SetupName) {
     checkName(SetupName);
     createSetup(SetupName);
 }
-
 if (RouteName) {
-    checkName(RouteName);
-    createRoute(RouteName);
-    addRoute(RouteName);
-    console.log(chalk.green(`Route named ${RouteName} created and added to router module`));
+    if(projectCheck) {
+        checkName(RouteName);
+        createRoute(RouteName);
+        addRoute(RouteName);
+        console.log(chalk.green(`Route named ${RouteName} created and added to router module`));
+    }
+    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (ControllerName) {
-    checkName(ControllerName);
-    createController(ControllerName);
-    console.log(chalk.green(`Controller named ${ControllerName} created`));
+    if(projectCheck) {
+        checkName(ControllerName);
+        createController(ControllerName);
+        console.log(chalk.green(`Controller named ${ControllerName} created`));
+    }
+    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (MiddlewareName) {
-    checkName(MiddlewareName);
-    createMiddleware(MiddlewareName);
-    console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
+    if(projectCheck){
+        checkName(MiddlewareName);
+        createMiddleware(MiddlewareName);
+        console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
+    }
+    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (!process.argv.slice(2).length) {

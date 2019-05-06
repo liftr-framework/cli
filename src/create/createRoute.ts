@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
+import chalk from 'chalk';
 import { createController } from './createController';
+import { checkExistence } from '../helpers';
 
 export const createRoute = (RouteName: string) => {
     const fileContent = `
@@ -10,8 +12,15 @@ export const ${RouteName}Route: Router = Router()
     .get('/', ${RouteName}Controller);
 `;
     const filepath = process.cwd() + `/src/routes/${RouteName}.route.ts`;
-    fs.writeFile(filepath, fileContent, (err) => {
-        if (err) throw err;
+    const check = checkExistence(`/src/routes/${RouteName}.route.ts`)
+    if(!check) {
+        fs.writeFile(filepath, fileContent, (err) => {
+            if (err) throw err;
     });
-    createController(RouteName);
+        createController(RouteName);
+    }
+    else {
+        console.error(chalk.red(`Route named ${RouteName} already exists!`)); 
+        process.exit(1);
+    }
 };

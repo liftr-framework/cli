@@ -1,4 +1,6 @@
 import fs from 'fs-extra';
+import chalk from 'chalk';
+import { checkExistence } from '../helpers';
 
 export const createController = (ControllerName: string) => {
     const fileContent: string = `
@@ -10,7 +12,14 @@ export let ${ControllerName}Controller = (req: Request, res: Response) => {
     };
 `;
     const filepath: string = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
-    fs.writeFile(filepath, fileContent, (err) => {
-        if (err) throw err;
-    });
+    const check = checkExistence(`/src/routes/${ControllerName}.route.ts`)
+    if(!check) {
+        fs.writeFile(filepath, fileContent, (err) => {
+            if (err) throw err;
+        });
+    }
+    else {
+        console.error(chalk.red(`Controller named ${ControllerName} already exists!`)); 
+        process.exit(1);
+    }
 };
