@@ -11,7 +11,7 @@ export const ${MiddlewareName}Middleware = (req: Request, res: Response, next: N
 };
 `;
     const filepath = process.cwd() + `/src/middleware/${MiddlewareName}.middleware.ts`;
-    const check = checkExistence(`/src/routes/${MiddlewareName}.route.ts`)
+    const check = checkExistence(`/src/middleware/${MiddlewareName}.middleware.ts`)
     if(!check) {
         fs.writeFile(filepath, fileContent, (err) => {
                 if (err) throw err;
