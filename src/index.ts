@@ -37,31 +37,28 @@ if (SetupName) {
     createSetup(SetupName);
 }
 if (RouteName) {
-    if(projectCheck) {
+    if (projectCheck) {
         checkName(RouteName);
         createRoute(RouteName);
         addRoute(RouteName);
         console.log(chalk.green(`Route named ${RouteName} created and added to router module`));
-    }
-    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (ControllerName) {
-    if(projectCheck) {
+    if (projectCheck) {
         checkName(ControllerName);
         createController(ControllerName);
         console.log(chalk.green(`Controller named ${ControllerName} created`));
-    }
-    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (MiddlewareName) {
-    if(projectCheck){
+    if (projectCheck) {
         checkName(MiddlewareName);
         createMiddleware(MiddlewareName);
         console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
-    }
-    else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
 if (!process.argv.slice(2).length) {

@@ -11,7 +11,8 @@
         "curly": [true, "ignore-same-line"],
         "no-var-requires": false,
         "interface-name": [true, "never-prefix"],
-        "ordered-imports": false
+        "ordered-imports": false,
+        "ban-types":false
     },
     "rulesDirectory": []
 }

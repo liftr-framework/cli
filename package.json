@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "start": "npm run build && npm run copy-templates && npm run global",
+    "lint": "tslint -p .",
     "build": "tsc -p .",
     "link-upstream": "git remote add upstream https://github.com/farisT/liftr",
     "sync": "git fetch origin && git checkout master && git pull && git checkout <your-branch> && git merge master && git push",
@@ -23,13 +24,15 @@
     "global": "npm i -g && liftr",
     "refresh": "rm -rf ./node_modules ./package-lock.json && clean && npm install",
     "tscov": "tscov --min-coverage 85",
-    "tscov:d": "tscov --details"
+    "tscov:d": "tscov --details",
+    "autofix": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
   },
   "dependencies": {
     "@types/fs-extra": "^5.0.5",
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
     "commander": "^2.19.0",
+    "express": "^4.16.4",
     "figlet": "^1.2.1",
     "fs-extra": "^7.0.1",
     "minimist": "^1.2.0",
