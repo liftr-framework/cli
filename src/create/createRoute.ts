@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import fs from 'fs';
 import chalk from 'chalk';
 import { createController } from './createController';
 import { checkExistence } from '../helpers';
@@ -14,9 +14,7 @@ export const ${RouteName}Route: Router = Router()
     const filepath = process.cwd() + `/src/routes/${RouteName}.route.ts`;
     const check = checkExistence(`/src/routes/${RouteName}.route.ts`)
     if(!check) {
-        fs.writeFile(filepath, fileContent, (err) => {
-            if (err) throw err;
-    });
+        fs.writeFileSync(filepath, fileContent);
         createController(RouteName);
     }
     else {

@@ -12,7 +12,7 @@ export let ${ControllerName}Controller = (req: Request, res: Response) => {
     };
 `;
     const filepath: string = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
-    const check = checkExistence(`/src/routes/${ControllerName}.route.ts`)
+    const check = checkExistence(`/src/controllers/${ControllerName}.route.ts`)
     if(!check) {
         fs.writeFile(filepath, fileContent, (err) => {
             if (err) throw err;
