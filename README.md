@@ -4,14 +4,16 @@
 [![npmlicense](https://img.shields.io/npm/l/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
 [![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
 
-Liftr is a quick project-starter/pseudo-framework CLI, built on [express](https://expressjs.com/), that will create the necessary files for you to begin a Node.js with Typescript project.
+The Liftr framework provides a structure and tools to build API's with TypeScript and express. This repo/package is for the CLI.
+
+The liftr-cli is a quick project-starter CLI to work with the Liftr framework, built on [express](https://expressjs.com/), it will create the necessary files for you to begin a Node.js with Typescript project.
 
 ## Quickstart
 
-Install Liftr as a global CLI.
+Install the liftr-cli as a global CLI.
 
 ```shell
-npm install -g liftr
+npm install -g @liftr/cli
 
 cd <your-repo-location>
 
@@ -23,7 +25,7 @@ This should setup a project with all the necessary folders and files so that you
 
 ### Commands
 
-Here are all the possibilities with Liftr
+Here are all the possibilities with the liftr-cli
 
 ```shell
 
@@ -49,9 +51,11 @@ liftr --middleware <your-middleware-name>
 ```
 ### Supporting packages
 
-Packages that can be used with liftr:
+| Package | Description | Version |
+| --- | --- | --- |
+| [@liftr/core](https://github.com/farisT/liftr-core) | The core package for Liftr | [![npmversion](https://img.shields.io/npm/v/@liftr/core.svg?style=for-the-badge)](https://github.com/farisT/liftr-core) |
+| [@liftr/docs](https://github.com/farisT/liftr-docs) | A documentation tool for liftr routes with swagger under the hood | [![npmversion](https://img.shields.io/npm/v/@liftr/docs.svg?style=for-the-badge)](https://github.com/farisT/liftr-docs) |
 
-- [liftr-docs](https://github.com/farisT/liftr-docs): A documentation tool for your Liftr routes with Swagger under the hood.
 
 
 ## Contributing
@@ -73,7 +77,7 @@ git push origin my-fix
 
 Lastly, open a pull request on Github.
 
-Before you run `npm start`, make sure you didn't install the `liftr` package globally. If you did, run `npm uninstall -g liftr` and run `npm start`, otherwise you will get an npm error.
+Before you run `npm start`, make sure you haven't installed the `liftr` package globally. If you did, run `npm uninstall -g @liftr/cli` and run `npm start`, otherwise you will get an npm error.
 
 The following npm scripts are available
 

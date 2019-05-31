@@ -2,14 +2,9 @@ import fs from 'fs';
 
 export const createServer = (setupFilepath: string) => {
     const fileContent = `import app from './app';
+import { Liftr } from '@liftr/core';
 
-const server = app.listen(app.get('port'), () => {
-    console.log(
-        'App is running on http://localhost:%d in %s mode',
-        app.get('port'),
-        app.get('env'),
-    );
-});
+const server = Liftr.server(app);
 
 export default server;
     `;
