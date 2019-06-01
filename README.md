@@ -55,7 +55,7 @@ liftr --middleware <your-middleware-name>
 | --- | --- | --- |
 | [@liftr/core](https://github.com/farisT/liftr-core) | The core package for Liftr | [![npmversion](https://img.shields.io/npm/v/@liftr/core.svg?style=for-the-badge)](https://github.com/farisT/liftr-core) |
 | [@liftr/docs](https://github.com/farisT/liftr-docs) | A documentation tool for liftr routes with swagger under the hood | [![npmversion](https://img.shields.io/npm/v/@liftr/docs.svg?style=for-the-badge)](https://github.com/farisT/liftr-docs) |
-
+| [@liftr/tscov](https://github.com/jeroenouw/liftr-tscov) | Check the type coverage of any TypeScript project | [![npmversion](https://img.shields.io/npm/v/@liftr/tscov.svg?style=for-the-badge)](https://github.com/jeroenouw/liftr-tscov) |
 
 
 ## Contributing
