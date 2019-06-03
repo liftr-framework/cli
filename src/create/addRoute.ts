@@ -22,7 +22,7 @@ export const routes: AppRouter[] = [
 import { ${newRouteName}Route } from '@routes/${newRouteName}.route'`;
 
             const newFileContent = [newtext.slice(0, position1), output, newtext.slice(position1)].join('');
-            const position2 = newFileContent.indexOf("import { Router } from 'express';") + 41;
+            const position2 = newFileContent.indexOf("import { Router } from 'express';") + 40;
             const finalFile = [newFileContent.slice(0, position2),
                 importStatement,
                 newFileContent.slice(position2)].join('');
