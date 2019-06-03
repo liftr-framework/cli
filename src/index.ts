@@ -4,7 +4,7 @@ import minimist from 'minimist';
 import chalk from 'chalk';
 
 import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
-import { checkName, checkExistence } from './helpers';
+import { checkName, checkExistence, readString } from './helpers';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -63,4 +63,5 @@ if (MiddlewareName) {
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();
+    readString();
 }
