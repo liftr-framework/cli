@@ -1,7 +1,10 @@
 import fs from 'fs-extra';
 import * as path from 'path';
+const { promisify } = require('util')
+const writeFile = promisify(fs.writeFile)
 
-export const createConfig = (setupFilepath: string) => {
+
+export const createConfig = async (setupFilepath: string) => {
     const fileContent = null;
     let filepath: string;
     if (setupFilepath) {
@@ -9,8 +12,6 @@ export const createConfig = (setupFilepath: string) => {
     } else {
        filepath = process.cwd() + '/tsconfig.json';
     }
-    fs.writeFile(filepath, fileContent, (err) => {
-        if (err) throw err;
-    });
-    fs.copySync(path.resolve(__dirname, '../templates/tsconfig.json'), filepath);
+    await writeFile(filepath, fileContent);
+    await fs.copySync(path.resolve(__dirname, '../templates/tsconfig.json'), filepath);
 };
