@@ -12,14 +12,13 @@ export let ${ControllerName}Controller = (req: Request, res: Response) => {
     };
 `;
     const filepath: string = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
-    const check = checkExistence(`/src/controllers/${ControllerName}.controller.ts`)
-    if(!check) {
+    const check = checkExistence(`/src/controllers/${ControllerName}.controller.ts`);
+    if (!check) {
         fs.writeFile(filepath, fileContent, (err) => {
             if (err) throw err;
         });
-    }
-    else {
-        console.error(chalk.red(`Controller named ${ControllerName} already exists!`)); 
+    } else {
+        console.error(chalk.red(`Controller named ${ControllerName} already exists!`));
         process.exit(1);
     }
 };

@@ -8,7 +8,11 @@ export const checkName = (name: string|boolean) => {
     }
 };
 
-export const checkExistence =  (path:string) =>  {
-    const check = fs.existsSync(process.cwd() + path)
+/**
+ * @param {string} path the path to be checked for existence
+ * @returns {boolean} true/false
+ */
+export function checkExistence(path: string): boolean {
+    const check = fs.existsSync(process.cwd() + path);
     return check;
-};
+}
