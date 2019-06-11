@@ -1,10 +1,10 @@
 import { AppRouter } from '@liftr/core'
-import { LiftrRoute } from '@routes/liftr.route'
+import { liftrRoute } from '@routes/liftr.route'
 
 
 export const routes: AppRouter[] = [
   {
-    handler: LiftrRoute,
+    handler: liftrRoute,
     middleware: [],
     path: '/',
   },

@@ -11,14 +11,13 @@ export const ${MiddlewareName}Middleware = (req: Request, res: Response, next: N
 };
 `;
     const filepath = process.cwd() + `/src/middleware/${MiddlewareName}.middleware.ts`;
-    const check = checkExistence(`/src/middleware/${MiddlewareName}.middleware.ts`)
-    if(!check) {
+    const check = checkExistence(`/src/middleware/${MiddlewareName}.middleware.ts`);
+    if (!check) {
         fs.writeFile(filepath, fileContent, (err) => {
                 if (err) throw err;
         });
-    }   
-    else {
-        console.error(chalk.red(`Middleware named ${MiddlewareName} already exists!`)); 
+    } else {
+        console.error(chalk.red(`Middleware named ${MiddlewareName} already exists!`));
         process.exit(1);
     }
 };

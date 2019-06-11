@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction} from "express"
-import { LiftrController } from "@controllers/liftr.controller"
+import { liftrController } from "@controllers/liftr.controller"
 
-export const LiftrRoute: Router = Router()
-  .get('/', LiftrController);
+export const liftrRoute: Router = Router()
+  .get('/', liftrController);

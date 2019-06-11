@@ -12,13 +12,12 @@ export const ${RouteName}Route: Router = Router()
     .get('/', ${RouteName}Controller);
 `;
     const filepath = process.cwd() + `/src/routes/${RouteName}.route.ts`;
-    const check = checkExistence(`/src/routes/${RouteName}.route.ts`)
-    if(!check) {
+    const check = checkExistence(`/src/routes/${RouteName}.route.ts`);
+    if (!check) {
         fs.writeFileSync(filepath, fileContent);
         createController(RouteName);
-    }
-    else {
-        console.error(chalk.red(`Route named ${RouteName} already exists!`)); 
+    } else {
+        console.error(chalk.red(`Route named ${RouteName} already exists!`));
         process.exit(1);
     }
 };
