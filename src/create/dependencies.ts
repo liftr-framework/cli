@@ -3,6 +3,12 @@ import { Spinner } from '../types/spinner.type';
 import chalk from 'chalk';
 const { exec } = require('child_process');
 
+/**
+ * @description Creates a package.json and runs npm install
+ * @param {string} setupName The name of the setup used for the package.json
+ * @param {Spinner} spinner The spinner class is passed to here to end the spinner once deps are installed.
+ */
+
 export const dependencies = async (setupName: string, spinner: Spinner) => {
   const setupPackageJson = process.cwd() + `/${setupName}/package.json`;
 

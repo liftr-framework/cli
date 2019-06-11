@@ -11,6 +11,11 @@ import { createNodemonConfig } from './nodemon';
 import { createTesting } from './createTesting';
 import { createUtil } from './createUtil';
 
+/**
+ * @description Creates the setup after the -s command is used on the CLI. Runs all the methods necessary
+ * @param {string} setupName The name of the setup to be created.
+ */
+
 export const createSetup = async (setupName: string) => {
     const spinner: Spinner = ora('Setting up Liftr project').start();
     spinner.spinner = 'moon';
