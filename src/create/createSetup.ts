@@ -1,5 +1,4 @@
 import fs from 'fs-extra';
-const util = require('util');
 const ora = require('ora');
 import { createApp } from './createApp';
 import { createServer } from './createServer';
@@ -8,7 +7,7 @@ import { createConfig } from './createConfig';
 import { createExampleApi } from './createExampleApi';
 import { Spinner } from '../types/spinner.type';
 import { createNodemonConfig } from './nodemon';
-import { createTesting } from './createTesting';
+import { createTesting } from './testing/createTesting';
 import { createUtil } from './createUtil';
 
 export const createSetup = async (setupName: string) => {
@@ -42,13 +41,12 @@ export const createSetup = async (setupName: string) => {
     const setupConfig: string = process.cwd() + `/${setupName}/tsconfig.json`;
     const setupNodemon: string = process.cwd() + `/${setupName}/nodemon.json`;
 
-    const liftrProject: any = util.promisify(createExampleApi);
-    liftrProject(setupName, spinner)
-        .then(createConfig(setupConfig))
-        .then(createUtil(setupName))
-        .then(createNodemonConfig(setupNodemon))
-        .then(createServer(setupServer))
-        .then(createApp(setupApp))
-        .then(createTesting(setupName))
-        .then(dependencies(setupName, spinner));
+    await createExampleApi(setupName);
+    await createConfig(setupConfig);
+    await createUtil(setupName);
+    createNodemonConfig(setupNodemon);
+    createServer(setupServer);
+    createApp(setupApp);
+    await createTesting(setupName);
+    await dependencies(setupName, spinner);
 };

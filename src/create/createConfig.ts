@@ -1,8 +1,7 @@
 import fs from 'fs-extra';
 import * as path from 'path';
-const { promisify } = require('util')
-const writeFile = promisify(fs.writeFile)
-
+const { promisify } = require('util');
+const writeFile = promisify(fs.writeFile);
 
 export const createConfig = async (setupFilepath: string) => {
     const fileContent = null;

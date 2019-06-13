@@ -17,13 +17,13 @@ export const createTesting = async (setupName: string) => {
             // if (err) console.error('Cant create files');
         });
         if (createPath.includes('mocha.opts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/mocha.opts'), createPath);
+            await fs.copySync(path.resolve(__dirname, '../../templates/mocha.opts'), createPath);
         }
         if (createPath.includes('.nycrc')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/.nycrc'), createPath);
+            await fs.copySync(path.resolve(__dirname, '../../templates/.nycrc'), createPath);
         }
         if (createPath.includes('mocha.require.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/mocha.require.ts'), createPath);
+            await fs.copySync(path.resolve(__dirname, '../../templates/mocha.require.ts'), createPath);
         }
     });
 };
