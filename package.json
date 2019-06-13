@@ -1,6 +1,6 @@
 {
   "name": "@liftr/cli",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "The Liftr CLI provides scaffolding for the Liftr framework",
   "author": "Faris Tangastani",
   "repository": "https://github.com/farisT/liftr",

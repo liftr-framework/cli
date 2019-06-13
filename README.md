@@ -1,12 +1,16 @@
 # Liftr
 
-[![npmversion](https://img.shields.io/npm/v/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
-[![npmlicense](https://img.shields.io/npm/l/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
+<p align="center">
+    <img alt="Liftr logo" src="./logo.png">
+</p>
+
+[![npmversion](https://img.shields.io/npm/v/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr)
+[![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
 [![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
 
-The Liftr framework provides a structure and tools to build API's with TypeScript and express. This repo/package is for the CLI.
+The Liftr framework provides a structure and tools to build API's with **TypeScript** and **express**. **This repo/package is for the CLI**.
 
-The liftr-cli is a quick project-starter CLI to work with the Liftr framework, built on [express](https://expressjs.com/), it will create the necessary files for you to begin a Node.js with Typescript project.
+The liftr-cli is a quick project-starter CLI to work with the Liftr framework, built on [express](https://expressjs.com/), it will create the necessary files for you to begin a Node.js & Typescript project.
 
 ## Quickstart
 
@@ -30,6 +34,7 @@ Here are all the possibilities with the liftr-cli
 ```shell
 
 # Create a setup for your Nodejs/Typescript project
+
 liftr -s <your-project-name>
 liftr --setup <your-project-name>
 
@@ -49,7 +54,7 @@ liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
 ```
-### Supporting packages
+## Supporting packages
 
 | Package | Description | Version |
 | --- | --- | --- |
