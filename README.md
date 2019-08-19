@@ -8,9 +8,9 @@
 [![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
 [![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
 
-The Liftr framework provides a structure and tools to build API's with **TypeScript** and **express**. **This repo/package is for the CLI**.
+The Liftr framework provides structure and tools to build API's in Node.js with [TypeScript](https://www.typescriptlang.org/) and [Express](https://expressjs.com/). **This repo contains the documentation for the CLI.**
 
-The liftr-cli is a quick project-starter CLI to work with the Liftr framework, built on [express](https://expressjs.com/), it will create the necessary files for you to begin a Node.js & Typescript project.
+The liftr-cli is a quick project-starter CLI to work with the Liftr framework, it will create the necessary files for you to begin a Node.js & Typescript project. Ontop o=, you can generate new backend components on the fly - providing a quicker way to build structured and robust API's.
 
 ## Quickstart
 
@@ -65,37 +65,8 @@ liftr --middleware <your-middleware-name>
 
 ## Contributing
 
-Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues).
-
-First fork this project.
-
-```shell
-git clone <your-forked-repo>
-npm install
-
-git checkout -b my-fix
-# fix some code...
-
-git commit -m "added this feature"
-git push origin my-fix
-```
-
-Lastly, open a pull request on Github.
-
-Before you run `npm start`, make sure you haven't installed the `liftr` package globally. If you did, run `npm uninstall -g @liftr/cli` and run `npm start`, otherwise you will get an npm error.
-
-The following npm scripts are available
-
--   `npm start` - create build, install globally and run liftr
--   `npm run build` - create build
--   `npm run global` - install globally and run liftr
--   `npm run link-upstream` - add remote
--   `npm run sync` - fetch, checkout, merge and push
--   `npm run copy-templates` - Moves templates to ./lib/templates
--   `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.
--   `npm run tscov` - checks the type coverage of your project with tscov
--   `npm run tscov:d` - shows all uncovered types with tscov
+Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues) and check the [contributing guidelines](https://github.com/farisT/liftr/blob/master/LICENSE/).
 
 ## License
 
-[![npmlicense](https://img.shields.io/npm/l/liftr.svg)](https://github.com/farisT/liftr/blob/master/LICENSE/)
+
