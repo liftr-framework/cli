@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { mkdirSync, statSync, existsSync} from 'fs-extra';
 const ora = require('ora');
 import { createApp } from './createApp';
 import { createServer } from './createServer';
@@ -21,7 +21,7 @@ export const createSetup = async (setupName: string) => {
         spinner.text = 'Creating necessary files and installing dependencies. This may take a while...';
     }, 3000);
     try {
-        fs.statSync(setupName);
+        statSync(setupName);
         // spinner.stop(true);
         clearTimeout(timeout);
         spinner.stop();
@@ -30,11 +30,11 @@ export const createSetup = async (setupName: string) => {
         // FILE DOESNT EXIST
       }
 
-    if (!fs.existsSync(setupName)) {
-       await fs.mkdirSync(setupName);
+    if (!existsSync(setupName)) {
+       await mkdirSync(setupName);
     }
-    if (!fs.existsSync(process.cwd() + `/${setupName}/src`)) {
-        await fs.mkdirSync(process.cwd() + `/${setupName}/src`);
+    if (!existsSync(process.cwd() + `/${setupName}/src`)) {
+        await mkdirSync(process.cwd() + `/${setupName}/src`);
     }
     const setupServer: string = process.cwd() + `/${setupName}/src/server.ts`;
     const setupApp: string = process.cwd() + `/${setupName}/src/app.ts`;

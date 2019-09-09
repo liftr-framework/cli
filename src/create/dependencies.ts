@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile } from 'fs-extra';
 import { Spinner } from '../types/spinner.type';
 import chalk from 'chalk';
 const { exec } = require('child_process');
@@ -48,7 +48,7 @@ export const dependencies = async (setupName: string, spinner: Spinner) => {
           }
       }
 `;
-    fs.writeFile(setupPackageJson, fileContent, (err) => {
+    writeFile(setupPackageJson, fileContent, (err) => {
       if (err) throw err;
     });
   };

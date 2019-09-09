@@ -1,11 +1,12 @@
 import { Utf8AsciiBinaryEncoding } from 'crypto';
+import { readFile, writeFile } from 'fs-extra';
 
 const fs = require('fs');
 const util = require('util');
 
 export const addRoute = (newRouteName: string) => {
-    const readFile = util.promisify(fs.readFile);
-    readFile(process.cwd() + '/src/routes/LiftrRoutingModule.ts', 'utf8')
+    const readFilePromise = util.promisify(readFile);
+    readFilePromise(process.cwd() + '/src/routes/LiftrRoutingModule.ts', 'utf8')
         .then((text: Utf8AsciiBinaryEncoding) => {
             const newtext = text;
             const position1 = text.indexOf(`
@@ -30,7 +31,7 @@ import { ${newRouteName}Route } from '@routes/${newRouteName}.route'`;
         })
         .then((content: string) => {
             const pathToNewFile = process.cwd() + '/src/routes/LiftrRoutingModule.ts';
-            fs.writeFile(pathToNewFile, content, (err: Error) => {
+            writeFile(pathToNewFile, content, (err: Error) => {
                 if (err) throw err;
             });
         })

@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
-import * as path from 'path';
+import { writeFile, copySync } from 'fs-extra';
+import { resolve } from 'path';
 
 export const createTesting = async (setupName: string) => {
     const fileContent = null;
@@ -13,17 +13,17 @@ export const createTesting = async (setupName: string) => {
         mochaRequire,
     ];
     await testingFiles.forEach(async (createPath) => {
-        await fs.writeFile(createPath, fileContent, (err) => {
+        await writeFile(createPath, fileContent, (err) => {
             // if (err) console.error('Cant create files');
         });
         if (createPath.includes('mocha.opts')) {
-            await fs.copySync(path.resolve(__dirname, '../../templates/mocha.opts'), createPath);
+            await copySync(resolve(__dirname, '../../templates/mocha.opts'), createPath);
         }
         if (createPath.includes('.nycrc')) {
-            await fs.copySync(path.resolve(__dirname, '../../templates/.nycrc'), createPath);
+            await copySync(resolve(__dirname, '../../templates/.nycrc'), createPath);
         }
         if (createPath.includes('mocha.require.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../../templates/mocha.require.ts'), createPath);
+            await copySync(resolve(__dirname, '../../templates/mocha.require.ts'), createPath);
         }
     });
 };

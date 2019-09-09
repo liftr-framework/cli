@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { copySync, writeFile } from 'fs-extra';
 import * as path from 'path';
 
 export const createExampleApi = async (setupName: string) => {
@@ -17,23 +17,23 @@ export const createExampleApi = async (setupName: string) => {
         ControllerSpecPath,
     ];
     await creationArray.forEach(async (createPath) => {
-        await fs.writeFile(createPath, fileContent, (err) => {
+        await writeFile(createPath, fileContent, (err) => {
             // if (err) throw err;
         });
         if (createPath.includes('LiftrRoutingModule.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/routes.ts'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/routes.ts'), createPath);
         }
         if (createPath.includes('liftr.route.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/route.ts'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/route.ts'), createPath);
         }
         if (createPath.includes('liftr.controller.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/controller.ts'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/controller.ts'), createPath);
         }
         if (createPath.includes('liftr.controller.spec.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/controller.spec.ts'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/controller.spec.ts'), createPath);
         }
         if (createPath.includes('liftr.middleware.ts')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/middleware.ts'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/middleware.ts'), createPath);
         }
     });
 };

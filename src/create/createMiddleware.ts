@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile } from 'fs-extra';
 import chalk from 'chalk';
 import { checkExistence } from '../helpers';
 
@@ -13,7 +13,7 @@ export const ${MiddlewareName}Middleware = (req: Request, res: Response, next: N
     const filepath = process.cwd() + `/src/middleware/${MiddlewareName}.middleware.ts`;
     const check = checkExistence(`/src/middleware/${MiddlewareName}.middleware.ts`);
     if (!check) {
-        fs.writeFile(filepath, fileContent, (err) => {
+        writeFile(filepath, fileContent, (err) => {
                 if (err) throw err;
         });
     } else {

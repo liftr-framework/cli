@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile } from 'fs-extra';
 
 export const createNodemonConfig = (setupFilePath: string) => {
     const fileContent = `
@@ -22,7 +22,7 @@ export const createNodemonConfig = (setupFilePath: string) => {
     } else {
         filePath = process.cwd() + '/nodemon.json';
     }
-    fs.writeFile(filePath, fileContent, (err) => {
+    writeFile(filePath, fileContent, (err) => {
         if (err) throw err;
     });
 };

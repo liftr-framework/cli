@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { writeFileSync } from 'fs';
 import chalk from 'chalk';
 import { createController } from './createController';
 import { checkExistence } from '../helpers';
@@ -14,7 +14,7 @@ export const ${RouteName}Route: Router = Router()
     const filepath = process.cwd() + `/src/routes/${RouteName}.route.ts`;
     const check = checkExistence(`/src/routes/${RouteName}.route.ts`);
     if (!check) {
-        fs.writeFileSync(filepath, fileContent);
+        writeFileSync(filepath, fileContent);
         createController(RouteName);
     } else {
         console.error(chalk.red(`Route named ${RouteName} already exists!`));

@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile, copySync } from 'fs-extra';
 import * as path from 'path';
 
 export const createUtil = async (setupName: string) => {
@@ -11,14 +11,14 @@ export const createUtil = async (setupName: string) => {
         tsLint,
     ];
     await utilFiles.forEach(async (createPath) => {
-        await fs.writeFile(createPath, fileContent, (err) => {
+        await writeFile(createPath, fileContent, (err) => {
             // if (err) throw err;
         });
         if (createPath.includes('.gitignore')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/.gitignoreTemplate'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/.gitignoreTemplate'), createPath);
         }
         if (createPath.includes('tslint.json')) {
-            await fs.copySync(path.resolve(__dirname, '../templates/tslintTemplate.json'), createPath);
+            await copySync(path.resolve(__dirname, '../templates/tslintTemplate.json'), createPath);
         }
     });
 };

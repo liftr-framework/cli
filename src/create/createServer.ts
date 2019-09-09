@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { writeFile } from 'fs';
 
 export const createServer = (setupFilepath: string) => {
     const fileContent = `import app from './app';
@@ -14,7 +14,7 @@ export default server;
     } else {
        filepath = process.cwd() + '/server.ts';
     }
-    fs.writeFile(filepath, fileContent, (err) => {
+    writeFile(filepath, fileContent, (err) => {
         if (err) throw err;
     });
 };

@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import fs from 'fs';
+import { existsSync } from 'fs';
 
 export const checkName = (name: string|boolean) => {
     if (name === true) {
@@ -9,6 +9,6 @@ export const checkName = (name: string|boolean) => {
 };
 
 export const checkExistence =  (path: string) =>  {
-    const check = fs.existsSync(process.cwd() + path);
+    const check = existsSync(process.cwd() + path);
     return check;
 };

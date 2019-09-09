@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile } from 'fs-extra';
 
 export const createTestController = (controllerName: string) => {
     const filepath: string = process.cwd() + `/src/controllers/${controllerName}.controller.spec.ts`;
@@ -25,7 +25,7 @@ describe('src/controllers/${controllerName}.controller.ts', () => {
         });
 });
 `;
-    fs.writeFile(filepath, fileContent, (err) => {
+    writeFile(filepath, fileContent, (err) => {
         if (err) throw err;
     });
 };

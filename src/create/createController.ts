@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { writeFile } from 'fs-extra';
 import chalk from 'chalk';
 import { checkExistence } from '../helpers';
 import { createTestController } from './testing/createTestController';
@@ -15,7 +15,7 @@ export let ${ControllerName}Controller = (req: Request, res: Response) => {
     const filepath: string = process.cwd() + `/src/controllers/${ControllerName}.controller.ts`;
     const check = checkExistence(`/src/controllers/${ControllerName}.controller.ts`);
     if (!check) {
-        await fs.writeFile(filepath, fileContent, (err) => {
+        await writeFile(filepath, fileContent, (err) => {
             if (err) throw err;
         });
         await createTestController(ControllerName);

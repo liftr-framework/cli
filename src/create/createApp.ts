@@ -4,14 +4,14 @@ export const createApp = (setupFilepath: string) => {
     const fileContent: string = `import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { routes } from '@routes/LiftrRoutingModule';
-import { Liftr } from '@liftr/core';
+import { server } from '@liftr/core';
 
 const app = express();
 
 dotenv.config();
 app.set('port', process.env.PORT || 4000);
 
-Liftr.setRoutes(routes, app);
+server(app, routes);
 
 export default app;
 `;

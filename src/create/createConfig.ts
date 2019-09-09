@@ -1,7 +1,7 @@
-import fs from 'fs-extra';
-import * as path from 'path';
+import { copySync, writeFile } from 'fs-extra';
+import { resolve } from 'path';
 const { promisify } = require('util');
-const writeFile = promisify(fs.writeFile);
+const writeFilePromisify = promisify(writeFile);
 
 export const createConfig = async (setupFilepath: string) => {
     const fileContent = null;
@@ -11,6 +11,6 @@ export const createConfig = async (setupFilepath: string) => {
     } else {
        filepath = process.cwd() + '/tsconfig.json';
     }
-    await writeFile(filepath, fileContent);
-    await fs.copySync(path.resolve(__dirname, '../templates/tsconfig.json'), filepath);
+    await writeFilePromisify(filepath, fileContent);
+    await copySync(resolve(__dirname, '../templates/tsconfig.json'), filepath);
 };
