@@ -1,14 +1,14 @@
 import { mkdirSync, statSync, existsSync} from 'fs-extra';
 const ora = require('ora');
-import { createApp } from './createApp';
-import { createServer } from './createServer';
+import { createApp } from './create-app';
+import { createServer } from './create-server';
 import { dependencies } from './dependencies';
-import { createConfig } from './createConfig';
-import { createExampleApi } from './createExampleApi';
+import { createConfig } from './create-config';
+import { createExampleApi } from './create-example-api';
 import { Spinner } from '../types/spinner.type';
 import { createNodemonConfig } from './nodemon';
-import { createTesting } from './testing/createTesting';
-import { createUtil } from './createUtil';
+import { createTesting } from './testing/create-testing';
+import { createUtil } from './create-util';
 
 export const createSetup = async (setupName: string) => {
     const spinner: Spinner = ora('Setting up Liftr project').start();

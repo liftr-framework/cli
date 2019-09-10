@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 import chalk from 'chalk';
-import { createController } from './createController';
+import { createController } from './create-controller';
 import { checkExistence } from '../helpers';
 
 export const createRoute = (RouteName: string) => {

@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra';
 import chalk from 'chalk';
 import { checkExistence } from '../helpers';
-import { createTestController } from './testing/createTestController';
+import { createTestController } from './testing/create-test-controller';
 
 export const createController = async (ControllerName: string) => {
     const fileContent: string = `
