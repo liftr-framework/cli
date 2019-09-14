@@ -2,9 +2,12 @@
 import program from 'commander';
 import minimist from 'minimist';
 import chalk from 'chalk';
+import * as content from './component-content';
 
 import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
 import { checkName, checkExistence } from './helpers';
+import { createModule } from './create/create-module';
+import { createComponent } from './create/creation-factory';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -16,11 +19,12 @@ console.log(
 );
 
 program
-    .description('A CLI for scaffolding Node/Typescript projects quick')
+    .description('The CLI for scaffolding Node/Typescript projects quick in the Liftr Framework')
     .option('-r , --route', 'create a route file')
     .option('-c , --controller', 'create a controller file')
+    .option('-l , --module', 'create a Liftr module')
     .option('-m , --middleware', 'create a middleware file')
-    .option('-s, --setup', 'create a standard dev setup for Nodejs / Typescript')
+    .option('-s, --setup', 'create the Liftr dev setup for Nodejs / Typescript')
     .version(packageJson.version)
     .parse(process.argv);
 
@@ -29,6 +33,7 @@ const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), { '--': true }
 const RouteName: string = argv.route || argv.r;
 const ControllerName: string = argv.controller || argv.c;
 const MiddlewareName: string = argv.middleware || argv.m;
+const ModuleName: string = argv.module || argv.l;
 const SetupName: string = argv.setup || argv.s;
 const projectCheck = checkExistence('/src/routes/LiftrRoutingModule.ts');
 
@@ -36,6 +41,12 @@ if (SetupName) {
     checkName(SetupName);
     createSetup(SetupName);
 }
+if (
+    ModuleName &&
+    projectCheck &&
+    checkName(ModuleName)
+    ) createComponent(ModuleName, content.moduleContent(ModuleName), true);
+
 if (RouteName) {
     if (projectCheck) {
         checkName(RouteName);
