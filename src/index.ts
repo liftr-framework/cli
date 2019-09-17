@@ -4,7 +4,7 @@ import minimist from 'minimist';
 import chalk from 'chalk';
 import * as content from './component-content';
 
-import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
+import { addRoute, createSetup, createRoute } from './create';
 import { checkName, checkExistence } from './helpers';
 import { createComponent } from './create/creation-factory';
 
@@ -34,20 +34,20 @@ const ControllerName: string = argv.controller || argv.c;
 const MiddlewareName: string = argv.middleware || argv.m;
 const ModuleName: string = argv.module || argv.l;
 const SetupName: string = argv.setup || argv.s;
-const projectCheck = checkExistence('/src/routes/LiftrRoutingModule.ts');
 
 if (SetupName) {
     checkName(SetupName);
     createSetup(SetupName);
 }
+
 if (
     ModuleName &&
-    projectCheck &&
+    checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(ModuleName)
     ) createComponent(ModuleName, content.moduleContent(ModuleName), 'module');
 
 if (RouteName) {
-    if (projectCheck) {
+    if (checkExistence('/src/routes/LiftrRoutingModule.ts')) {
         checkName(RouteName);
         createRoute(RouteName);
         addRoute(RouteName);
@@ -57,13 +57,13 @@ if (RouteName) {
 
 if (
     ControllerName &&
-    projectCheck &&
+    checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(ControllerName)
     ) createComponent(ControllerName, content.controllerContent(ControllerName), 'controller');
 
 if (
     MiddlewareName &&
-    projectCheck &&
+    checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(MiddlewareName)
     ) createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware');
 
