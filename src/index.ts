@@ -6,7 +6,6 @@ import * as content from './component-content';
 
 import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
 import { checkName, checkExistence } from './helpers';
-import { createModule } from './create/create-module';
 import { createComponent } from './create/creation-factory';
 
 const packageJson = require('../package.json');
@@ -45,7 +44,7 @@ if (
     ModuleName &&
     projectCheck &&
     checkName(ModuleName)
-    ) createComponent(ModuleName, content.moduleContent(ModuleName), true);
+    ) createComponent(ModuleName, content.moduleContent(ModuleName), 'module');
 
 if (RouteName) {
     if (projectCheck) {
@@ -56,21 +55,17 @@ if (RouteName) {
     } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
 }
 
-if (ControllerName) {
-    if (projectCheck) {
-        checkName(ControllerName);
-        createController(ControllerName);
-        console.log(chalk.green(`Controller named ${ControllerName} created`));
-    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
-}
+if (
+    ControllerName &&
+    projectCheck &&
+    checkName(ControllerName)
+    ) createComponent(ControllerName, content.controllerContent(ControllerName), 'controller');
 
-if (MiddlewareName) {
-    if (projectCheck) {
-        checkName(MiddlewareName);
-        createMiddleware(MiddlewareName);
-        console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
-    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
-}
+if (
+    MiddlewareName &&
+    projectCheck &&
+    checkName(MiddlewareName)
+    ) createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware');
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();
