@@ -17,12 +17,27 @@ export const checkExistence =  (path: string): boolean =>  {
     }
 };
 
-export const fileExists = async (path: string): Promise<boolean> => !!(await stat(path).catch(() => false));
+export const folderExists = async (path: string): Promise<boolean> => !!(await stat(path).catch(() => false));
 
 export async function creation(dirpath: string, filePath: string, fileContent: string): Promise<void> {
-    const exists: Boolean = await fileExists(dirpath);
-    if (!exists) {
-        await mkdir(dirpath);
-        await writeFile(filePath, fileContent);
-    } else throw new Error('File already exists');
+    const folderBlackList = [
+        process.cwd() + '/src/middlewares',
+        process.cwd() + '/src/routes',
+        process.cwd() + '/src/controllers',
+    ];
+    const arrayContainsFolder = (folderBlackList.indexOf(dirpath) > -1);
+    if (arrayContainsFolder) {
+        // this path taken if there is --flat command passed (only create files no folder)
+        const exists: Boolean = await folderExists(filePath);
+        if (!exists) {
+            await writeFile(filePath, fileContent);
+        } else throw new Error('File already exists');
+    } else {
+        const exists: Boolean = await folderExists(dirpath);
+        if (!exists) {
+            // this path taken if there is no --flat command passed (create folder) DEFAULT
+            await mkdir(dirpath);
+            await writeFile(filePath, fileContent);
+        } else throw new Error('Folder already exists');
+    }
 }

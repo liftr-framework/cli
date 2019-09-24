@@ -1,10 +1,11 @@
 import { creation } from '../helpers';
 import chalk from 'chalk';
 
-export async function createComponent(name: string, content: string, extension: string) {
+export async function createComponent(name: string, content: string, extension: string, flatFile: boolean) {
     try {
-        const folderPath =  process.cwd() + `/src/routes/${name}`;
-        const filePath = process.cwd() + `/src/routes/${name}/${name}.${extension}.ts`;
+        const path = flatFile ? `/src/${extension}s` : `/src/${extension}s/${name}`;
+        const folderPath = process.cwd() + path;
+        const filePath = process.cwd() + path + `/${name}.${extension}.ts`;
         await creation(folderPath, filePath, content);
         console.log(chalk.green(`Liftr component named ${name} created`));
     } catch (error) {

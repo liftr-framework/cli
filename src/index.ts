@@ -29,11 +29,21 @@ program
 
 const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), { '--': true });
 
+console.log(argv);
+
 const RouteName: string = argv.route || argv.r;
 const ControllerName: string = argv.controller || argv.c;
 const MiddlewareName: string = argv.middleware || argv.m;
 const ModuleName: string = argv.module || argv.l;
 const SetupName: string = argv.setup || argv.s;
+const flatFile: string = argv.flat || argv.f;
+let flat;
+
+if (flatFile === undefined) {
+    flat = false;
+} else {
+    flat = true;
+}
 
 if (SetupName) {
     checkName(SetupName);
@@ -44,7 +54,7 @@ if (
     ModuleName &&
     checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(ModuleName)
-    ) createComponent(ModuleName, content.moduleContent(ModuleName), 'module');
+    ) createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
 
 if (RouteName) {
     if (checkExistence('/src/routes/LiftrRoutingModule.ts')) {
@@ -59,13 +69,13 @@ if (
     ControllerName &&
     checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(ControllerName)
-    ) createComponent(ControllerName, content.controllerContent(ControllerName), 'controller');
+    ) createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
 
 if (
     MiddlewareName &&
     checkExistence('/src/routes/LiftrRoutingModule.ts') &&
     checkName(MiddlewareName)
-    ) createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware');
+    ) createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();
