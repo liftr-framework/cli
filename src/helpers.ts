@@ -17,6 +17,15 @@ export const checkExistence =  (path: string): boolean =>  {
     }
 };
 
+export const checkLiftrProject =  (): boolean =>  {
+    const path = '/src/routes/LiftrRoutingModule.ts';
+    if (existsSync(process.cwd() + path)) return true;
+    else {
+        console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+        return false;
+    }
+};
+
 export const folderExists = async (path: string): Promise<boolean> => !!(await stat(path).catch(() => false));
 
 export async function creation(dirpath: string, filePath: string, fileContent: string): Promise<void> {

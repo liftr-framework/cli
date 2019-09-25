@@ -1,7 +1,6 @@
 import { Utf8AsciiBinaryEncoding } from 'crypto';
 import { readFile, writeFile } from 'fs-extra';
 
-const fs = require('fs');
 const util = require('util');
 
 export const addRoute = (newRouteName: string) => {

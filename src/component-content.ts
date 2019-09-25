@@ -16,7 +16,7 @@ export const routeContent = (routeName: string): string => `
 import { Route } from '@liftr/core';
 import { ${routeName}Controller } from '@controllers/${routeName}.controller';
 
-export const {routeName} = Route.get('/', ${routeName}Controller);
+export const ${routeName} = Route.get('/', ${routeName}Controller);
 `;
 
 export const controllerContent = (controllerName: string): string => `

@@ -1,4 +1,4 @@
-import { writeFile, copySync } from 'fs-extra';
+import { writeFile, copy} from 'fs-extra';
 import * as path from 'path';
 
 export const createUtil = async (setupName: string) => {
@@ -15,10 +15,10 @@ export const createUtil = async (setupName: string) => {
             // if (err) throw err;
         });
         if (createPath.includes('.gitignore')) {
-            await copySync(path.resolve(__dirname, '../templates/.gitignoreTemplate'), createPath);
+            await copy(path.resolve(__dirname, '../templates/.gitignoreTemplate'), createPath);
         }
         if (createPath.includes('tslint.json')) {
-            await copySync(path.resolve(__dirname, '../templates/tslintTemplate.json'), createPath);
+            await copy(path.resolve(__dirname, '../templates/tslintTemplate.json'), createPath);
         }
     });
 };
