@@ -1,7 +1,7 @@
 
 export const moduleContent = (moduleName: string): string => `
 import { Module } from '@liftr/core';
-export const ${moduleName} = Module([])
+export const ${moduleName} = Module([ ])
 `;
 
 export const middleWareContent = (middlewareName: string): string => `

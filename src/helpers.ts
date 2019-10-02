@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { existsSync, stat, mkdir, writeFile } from 'fs-extra';
+// import glob from 'glob';
 
 export const checkName = (name: string|boolean) => {
     if (typeof name === 'string') return true;
@@ -34,6 +35,7 @@ export async function creation(dirpath: string, filePath: string, fileContent: s
         process.cwd() + '/src/routes',
         process.cwd() + '/src/controllers',
     ];
+    console.log(filePath);
     const arrayContainsFolder = (folderBlackList.indexOf(dirpath) > -1);
     if (arrayContainsFolder) {
         // this path taken if there is --flat command passed (only create files no folder)
@@ -42,11 +44,19 @@ export async function creation(dirpath: string, filePath: string, fileContent: s
             await writeFile(filePath, fileContent);
         } else throw new Error('File already exists');
     } else {
+        // this path taken if there is no --flat command passed (create folder) DEFAULT
         const exists: Boolean = await folderExists(dirpath);
+        console.log('exists', exists);
+        console.log('filepath', filePath);
         if (!exists) {
-            // this path taken if there is no --flat command passed (create folder) DEFAULT
             await mkdir(dirpath);
             await writeFile(filePath, fileContent);
         } else throw new Error('Folder already exists');
     }
 }
+
+// export function findModuleInFolder(path: string) {
+//     const fullpath = '/src/routes/' + path + '/*.module.ts';
+//     const mod = glob(process.cwd() +  fullpath, {}, (err, files) => files);
+//     console.log(mod);
+// }

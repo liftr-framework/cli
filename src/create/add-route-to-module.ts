@@ -1,6 +1,10 @@
 import { readFile, writeFile } from 'fs-extra';
 
 export const addRouteToModule = async (newRouteName: string, path: string) => {
+    if (path === undefined) {
+        console.error('No module path was provided');
+        process.exit(1);
+    }
     const file: Buffer = await readFile(process.cwd() + '/src/routes/' + path + '.module.ts');
     const position1 = file.indexOf(`= Module([
 `) + 10;
