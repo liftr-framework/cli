@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs-extra';
 
-export const addModule = async (newModuleName: string) => {
+export const addModule = async (newModuleName: string, flatCheck: boolean) => {
     const file: Buffer = await readFile(process.cwd() + '/src/routes/LiftrRoutingModule.ts');
     const position1 = file.indexOf(`
 export const routes: AppRouter[] = [
@@ -11,8 +11,16 @@ export const routes: AppRouter[] = [
     module: ${newModuleName}Module,
     middleware: [],
   },`;
-    const importStatement = `
+    let importStatement;
+    if (flatCheck) {
+      importStatement = `
+      import { ${newModuleName}Module } from '@routes/${newModuleName}.module';`;
+    } else {
+      importStatement = `
 import { ${newModuleName}Module } from '@routes/${newModuleName}/${newModuleName}.module';`;
+    }
+//     const importStatement = `
+// import { ${newModuleName}Module } from '@routes/${newModuleName}/${newModuleName}.module';`;
     const newFileContent = [file.slice(0, position1), output, file.slice(position1)].join('');
     const position2 = newFileContent.indexOf("import { AppRouter } from '@liftr/core';") + 40;
     const finalFile = [

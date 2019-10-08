@@ -1,7 +1,14 @@
 
 export const moduleContent = (moduleName: string): string => `
 import { Module } from '@liftr/core';
-export const ${moduleName} = Module([ ])
+import { ${moduleName}Route } from './${moduleName}.routes';
+
+export const ${moduleName}Module = Module([
+    {
+        route: ${moduleName}Route,
+        middleware: [],
+    },
+])
 `;
 
 export const middleWareContent = (middlewareName: string): string => `
@@ -14,13 +21,22 @@ export const ${middlewareName}Middleware = (req: Request, res: Response, next: N
 
 export const routeContent = (routeName: string): string => `
 import { Route } from '@liftr/core';
+import { ${routeName}Controller } from '@controllers/${routeName}/${routeName}.controller';
+
+export const ${routeName}Route = Route.get('/', ${routeName}Controller);
+`;
+
+export const flatRouteContent = (routeName: string): string => `
+import { Route } from '@liftr/core';
 import { ${routeName}Controller } from '@controllers/${routeName}.controller';
 
-export const ${routeName} = Route.get('/', ${routeName}Controller);
+export const ${routeName}Route = Route.get('/', ${routeName}Controller);
 `;
 
 export const controllerContent = (controllerName: string): string => `
-export const ${controllerName} = (req: Request, res: Response, next: NextFunction) => {
+import { Request, Response, NextFunction } from 'express';
+
+export const ${controllerName}Controller = (req: Request, res: Response, next: NextFunction) => {
     res.send('Lift off!');
 };
 `;

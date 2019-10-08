@@ -2,7 +2,7 @@ import { appendFile, readFile, writeFile } from 'fs-extra';
 
 export const addRoute = async (newRouteName: string, path: string) => {
     try {
-        const file: Buffer = await readFile(process.cwd() + '/src/routes/' + path + '.routes.ts');
+        const file: Buffer = await readFile(path);
         const position2 = file.indexOf("import { Route } from '@liftr/core';") + 37;
         const importStatement = `
 import { ${newRouteName}Controller } from '@controllers/${newRouteName}/${newRouteName}.controller';
@@ -14,8 +14,8 @@ import { ${newRouteName}Controller } from '@controllers/${newRouteName}/${newRou
         const route = `
 export const ${newRouteName}Route = Route.get('/${newRouteName}', ${newRouteName}Controller);
     `;
-        await writeFile(process.cwd() + '/src/routes/' + path + '.routes.ts', newFile);
-        await appendFile(process.cwd() + '/src/routes/' + path + '.routes.ts', route);
+        await writeFile(path, newFile);
+        await appendFile(path, route);
     } catch (error) {
         console.error('Error:', error);
     }

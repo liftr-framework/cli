@@ -25,7 +25,7 @@ export const dependencies = async (setupName: string, spinner: Spinner) => {
             "author": "",
             "license": "ISC",
             "dependencies": {
-              "@liftr/core": "0.0.1",
+              "@liftr/core": "1.0.0",
               "dotenv": "^6.2.0",
               "express": "^4.16.4",
               "tsconfig-paths": "^3.6.0",
