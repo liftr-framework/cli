@@ -1,12 +1,19 @@
 import { appendFile, readFile, writeFile } from 'fs-extra';
 
-export const addRoute = async (newRouteName: string, path: string) => {
+export const addRoute = async (newRouteName: string, path: string, flatCheck: boolean) => {
     try {
         const file: Buffer = await readFile(path);
         const position2 = file.indexOf("import { Route } from '@liftr/core';") + 37;
-        const importStatement = `
+        let importStatement;
+        if (flatCheck) {
+            importStatement = `
+import { ${newRouteName}Controller } from '@controllers/${newRouteName}.controller';
+`;
+        } else {
+            importStatement = `
 import { ${newRouteName}Controller } from '@controllers/${newRouteName}/${newRouteName}.controller';
 `;
+        }
         const newFile = [
             file.slice(0, position2),
             importStatement,

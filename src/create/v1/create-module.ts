@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { creation } from '../helpers';
+import { creation } from '../../helpers';
 
 export const createModule = async (moduleName: string): Promise<void> => {
     const fileContent = `

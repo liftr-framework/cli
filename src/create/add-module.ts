@@ -14,7 +14,7 @@ export const routes: AppRouter[] = [
     let importStatement;
     if (flatCheck) {
       importStatement = `
-      import { ${newModuleName}Module } from '@routes/${newModuleName}.module';`;
+import { ${newModuleName}Module } from '@routes/${newModuleName}.module';`;
     } else {
       importStatement = `
 import { ${newModuleName}Module } from '@routes/${newModuleName}/${newModuleName}.module';`;

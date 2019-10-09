@@ -6,7 +6,7 @@ import * as content from './component-content';
 
 import { createSetup } from './create';
 import { checkName, checkLiftrProject } from './helpers';
-import { createComponent, findModuleAndInsertComponents } from './create/creation-factory';
+import { createComponent, findModuleAndInsertComponents, createTestFile } from './create/creation-factory';
 import { addModule } from './create/add-module';
 
 const packageJson = require('../package.json');
@@ -24,7 +24,7 @@ program
     .description('The CLI for scaffolding Node/Typescript projects quick in the Liftr Framework')
     // .option('-t , --test', 'Lift test command')
     .option('-m , --module', 'create a Liftr module with a Routes file')
-    .option('-r , --route', 'Create a route in target file and add it to its module')
+    .option('-r , --route , -t , --target ', 'create a route in target file and add it to its module')
     .option('-c , --controller', 'create a controller file')
     .option('--middleware', 'create a middleware file')
     .option('-s , --setup', 'create the Liftr dev setup for Nodejs / Typescript')
@@ -34,7 +34,6 @@ program
 const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), {'--': true});
 
 const RouteName: string = argv.route;
-// const TestCommand: string = argv.test || argv.t;
 const ControllerName: string = argv.controller;
 const MiddlewareName: string = argv.middleware;
 const ModuleName: string = argv.module || argv.m;
@@ -52,11 +51,7 @@ if (SetupName) {
     createSetup(SetupName);
 }
 
-if (
-    ModuleName &&
-    checkLiftrProject() &&
-    checkName(ModuleName)
-    ) {
+if (ModuleName && checkLiftrProject() && checkName(ModuleName)) {
     const routeComponent = flat ? content.flatRouteContent(ModuleName) : content.routeContent(ModuleName);
     createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
     createComponent(ModuleName, routeComponent, 'route', flat);
@@ -65,24 +60,17 @@ if (
 }
 
 if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target)) {
-    findModuleAndInsertComponents(RouteName, target);
+    findModuleAndInsertComponents(RouteName, target, flat);
 }
 
-// if (TestCommand && target) {
-//     findModuleInProject(TestCommand, target);
-// }
+if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
+    createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
+    createTestFile(ControllerName, content.testControllerContent(ControllerName), 'controller', flat);
+}
 
-if (
-    ControllerName &&
-    checkLiftrProject() &&
-    checkName(ControllerName)
-    ) createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
-
-if (
-    MiddlewareName &&
-    checkLiftrProject() &&
-    checkName(MiddlewareName)
-    ) createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
+if (MiddlewareName && checkLiftrProject() && checkName(MiddlewareName)) {
+    createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
+}
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

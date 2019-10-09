@@ -1,6 +1,6 @@
 import { writeFile } from 'fs-extra';
 import chalk from 'chalk';
-import { checkExistence } from '../helpers';
+import { checkExistence } from '../../helpers';
 
 export const createMiddleware = (MiddlewareName: string) => {
     const fileContent = `

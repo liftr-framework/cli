@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import glob from 'glob';
 import { addRoute } from './add-route-to-file';
 import { addRouteToModule } from './add-route-to-module';
-import { controllerContent } from '../component-content';
+import { controllerContent, testControllerContent } from '../component-content';
 
 export async function createComponent(name: string, content: string, extension: string, flatFile: boolean) {
     try {
@@ -23,7 +23,21 @@ export async function createComponent(name: string, content: string, extension: 
     }
 }
 
-export async function findModuleAndInsertComponents(newName: string, targetFileName: string) {
+export async function createTestFile(name: string, content: string, extension: string, flatFile: boolean) {
+    try {
+        const path = flatFile ? `/src/${extension}s` : `/src/${extension}s/${name}`;
+        const ext = extension === 'route' ? 'routes' : extension;
+        const folderPath = process.cwd() + path;
+        const filePath = process.cwd() + path + `/${name}.${ext}.spec.ts`;
+        await creation(folderPath, filePath, content);
+        console.log(chalk.green(`Liftr ${extension} spec file named ${name} created`));
+    } catch (error) {
+        console.error('An error has occured with creating the Liftr component', error);
+        process.exit(1);
+    }
+}
+
+export async function findModuleAndInsertComponents(newName: string, targetFileName: string, flatFile: boolean) {
     const modulePath = `/src/routes/**/${targetFileName}.module.ts`;
     const routePath = `/src/routes/**/${targetFileName}.routes.ts`;
     if (targetFileName) {
@@ -36,8 +50,9 @@ export async function findModuleAndInsertComponents(newName: string, targetFileN
         glob(process.cwd() +  routePath, {}, (err, filePaths: string[]) => {
             const path = filePaths[0];
             if (path) {
-                addRoute(newName, path);
-                createComponent(newName, controllerContent(newName), 'controller', false);
+                addRoute(newName, path, flatFile);
+                createComponent(newName, controllerContent(newName), 'controller', flatFile);
+                createTestFile(newName, testControllerContent(newName), 'controller', flatFile);
             }
         });
     } else throw new Error('Target file not specified');
