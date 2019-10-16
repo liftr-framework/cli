@@ -15,12 +15,11 @@
     "nodejs"
   ],
   "scripts": {
-    "start": "npm run build && npm run copy-templates && npm run global",
+    "start": "npm run build && npm run global",
     "build": "tsc -p .",
     "link-upstream": "git remote add upstream https://github.com/farisT/liftr",
     "sync": "git fetch origin && git checkout master && git pull && git checkout <your-branch> && git merge master && git push",
     "clean": "rm -rf ./lib",
-    "copy-templates": "cp -a templates/. lib/templates/",
     "global": "npm i -g && liftr",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "tscov": "tscov --min-coverage 85",
