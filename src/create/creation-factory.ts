@@ -1,7 +1,7 @@
 import { creation } from '../helpers';
 import chalk from 'chalk';
 import glob from 'glob';
-import { addRoute } from './add-route-to-file';
+import { addRouteToFile } from './add-route-to-file';
 import { addRouteToModule } from './add-route-to-module';
 import { controllerContent, testControllerContent } from '../component-content';
 
@@ -50,7 +50,7 @@ export async function findModuleAndInsertComponents(newName: string, targetFileN
         glob(process.cwd() +  routePath, {}, (err, filePaths: string[]) => {
             const path = filePaths[0];
             if (path) {
-                addRoute(newName, path, flatFile);
+                addRouteToFile(newName, path, flatFile);
                 createComponent(newName, controllerContent(newName), 'controller', flatFile);
                 createTestFile(newName, testControllerContent(newName), 'controller', flatFile);
             }

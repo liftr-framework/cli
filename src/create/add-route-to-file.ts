@@ -1,6 +1,6 @@
 import { appendFile, readFile, writeFile } from 'fs-extra';
 
-export const addRoute = async (newRouteName: string, path: string, flatCheck: boolean) => {
+export const addRouteToFile = async (newRouteName: string, path: string, flatCheck: boolean) => {
     try {
         const file: Buffer = await readFile(path);
         const position2 = file.indexOf("import { Route } from '@liftr/core';") + 37;

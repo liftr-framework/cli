@@ -19,8 +19,6 @@ import { ${newModuleName}Module } from '@routes/${newModuleName}.module';`;
       importStatement = `
 import { ${newModuleName}Module } from '@routes/${newModuleName}/${newModuleName}.module';`;
     }
-//     const importStatement = `
-// import { ${newModuleName}Module } from '@routes/${newModuleName}/${newModuleName}.module';`;
     const newFileContent = [file.slice(0, position1), output, file.slice(position1)].join('');
     const position2 = newFileContent.indexOf("import { AppRouter } from '@liftr/core';") + 40;
     const finalFile = [

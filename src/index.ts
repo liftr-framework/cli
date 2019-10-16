@@ -4,10 +4,8 @@ import minimist from 'minimist';
 import chalk from 'chalk';
 import * as content from './component-content';
 
-import { createSetup } from './create';
+import { addModule, createSetup, creationFactory } from './create';
 import { checkName, checkLiftrProject } from './helpers';
-import { createComponent, findModuleAndInsertComponents, createTestFile } from './create/creation-factory';
-import { addModule } from './create/add-module';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -53,23 +51,23 @@ if (SetupName) {
 
 if (ModuleName && checkLiftrProject() && checkName(ModuleName)) {
     const routeComponent = flat ? content.flatRouteContent(ModuleName) : content.routeContent(ModuleName);
-    createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
-    createComponent(ModuleName, routeComponent, 'route', flat);
-    createComponent(ModuleName, content.controllerContent(ModuleName), 'controller', flat);
+    creationFactory.createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
+    creationFactory.createComponent(ModuleName, routeComponent, 'route', flat);
+    creationFactory.createComponent(ModuleName, content.controllerContent(ModuleName), 'controller', flat);
     addModule(ModuleName, flat);
 }
 
 if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target)) {
-    findModuleAndInsertComponents(RouteName, target, flat);
+    creationFactory.findModuleAndInsertComponents(RouteName, target, flat);
 }
 
 if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
-    createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
-    createTestFile(ControllerName, content.testControllerContent(ControllerName), 'controller', flat);
+    creationFactory.createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
+    creationFactory.createTestFile(ControllerName, content.testControllerContent(ControllerName), 'controller', flat);
 }
 
 if (MiddlewareName && checkLiftrProject() && checkName(MiddlewareName)) {
-    createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
+    creationFactory.createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
 }
 
 if (!process.argv.slice(2).length) {
