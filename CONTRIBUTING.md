@@ -22,5 +22,4 @@ The following npm script are available
 - `npm run test` - install globally and run liftr
 - `npm run link-upstream` - add remote
 - `npm run sync` - fetch, checkout, merge and push
-- `npm run copy-templates` - Moves templates to ./lib/templates
 - `npm run refresh` - removes node modules, package-lock.json, lib and re-installs everything.

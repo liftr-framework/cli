@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import glob from 'glob';
 import { addRouteToFile } from './add-route-to-file';
 import { addRouteToModule } from './add-route-to-module';
-import { controllerContent, testControllerContent } from '../component-content';
+import { controllerContent, testControllerContent, flatTestControllerContent } from '../component-content';
 
 export async function createComponent(name: string, content: string, extension: string, flatFile: boolean) {
     try {
@@ -40,6 +40,8 @@ export async function createTestFile(name: string, content: string, extension: s
 export async function findModuleAndInsertComponents(newName: string, targetFileName: string, flatFile: boolean) {
     const modulePath = `/src/routes/**/${targetFileName}.module.ts`;
     const routePath = `/src/routes/**/${targetFileName}.routes.ts`;
+    const testControllerComponentContent = flatFile ?
+    flatTestControllerContent(newName) : testControllerContent(newName);
     if (targetFileName) {
         glob(process.cwd() +  modulePath, {}, (err, filePaths: string[]) => {
             const path = filePaths[0];
@@ -52,7 +54,7 @@ export async function findModuleAndInsertComponents(newName: string, targetFileN
             if (path) {
                 addRouteToFile(newName, path, flatFile);
                 createComponent(newName, controllerContent(newName), 'controller', flatFile);
-                createTestFile(newName, testControllerContent(newName), 'controller', flatFile);
+                createTestFile(newName, testControllerComponentContent, 'controller', flatFile);
             }
         });
     } else throw new Error('Target file not specified');

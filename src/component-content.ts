@@ -89,3 +89,28 @@ describe('src/controllers/${controllerName}.controller.ts', () => {
     });
 });
 `;
+
+export const flatTestControllerContent = (controllerName: string): string => `
+import * as sinon from 'sinon';
+import { expect } from 'chai';
+import { Request, Response, NextFunction } from 'express';
+import { ${controllerName}Controller } from './${controllerName}.controller';
+
+describe('src/controllers/${controllerName}/${controllerName}.controller.ts', () => {
+    let sandbox: sinon.SinonSandbox;
+    let req: any = {};
+    let responseStub: Partial<Response>;
+    let next: Partial<NextFunction>;
+    beforeEach(() => {
+        sandbox = sinon.createSandbox();
+        responseStub = {
+            send: sandbox.stub(),
+        }
+    });
+
+    it('should send a message' , () => {
+        ${controllerName}Controller(req as Request, responseStub as Response, next as NextFunction);
+        expect(responseStub.send).to.be.calledWith('Lift off!');
+    });
+});
+`;

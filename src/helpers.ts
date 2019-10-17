@@ -9,14 +9,6 @@ export const checkName = (name: string|boolean) => {
     }
 };
 
-export const checkExistence =  (path: string): boolean =>  {
-    if (existsSync(process.cwd() + path)) return true;
-    else {
-        console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
-        return false;
-    }
-};
-
 export const checkLiftrProject =  (): boolean =>  {
     const path = '/src/routes/LiftrRoutingModule.ts';
     if (existsSync(process.cwd() + path)) return true;
