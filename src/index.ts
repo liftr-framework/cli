@@ -2,9 +2,10 @@
 import program from 'commander';
 import minimist from 'minimist';
 import chalk from 'chalk';
+import * as content from './component-content';
 
-import { createController, addRoute, createSetup, createRoute, createMiddleware } from './create';
-import { checkName, checkExistence } from './helpers';
+import { addModule, createSetup, creationFactory } from './create';
+import { checkName, checkLiftrProject } from './helpers';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -12,53 +13,65 @@ const clear = require('clear');
 
 clear();
 console.log(
-    figlet.textSync('Liftr', { horizontalLayout: 'full' }),
+    chalk.magenta(
+        figlet.textSync('Liftr', { horizontalLayout: 'full' }),
+    ),
 );
 
 program
-    .description('A CLI for scaffolding Node/Typescript projects quick')
-    .option('-r , --route', 'create a route file')
+    .description('The CLI for scaffolding Node/Typescript projects quick in the Liftr Framework')
+    .option('-m , --module', 'create a Liftr module with a Routes file')
+    .option('-r , --route , -t , --target ', 'create a route in target file and add it to its module')
     .option('-c , --controller', 'create a controller file')
-    .option('-m , --middleware', 'create a middleware file')
-    .option('-s, --setup', 'create a standard dev setup for Nodejs / Typescript')
+    .option('--middleware', 'create a middleware file')
+    .option('-s , --setup', 'create the Liftr dev setup for Nodejs / Typescript')
     .version(packageJson.version)
     .parse(process.argv);
 
-const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), { '--': true });
+const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), {'--': true});
 
-const RouteName: string = argv.route || argv.r;
-const ControllerName: string = argv.controller || argv.c;
-const MiddlewareName: string = argv.middleware || argv.m;
-const SetupName: string = argv.setup || argv.s;
-const projectCheck = checkExistence('/src/routes/LiftrRoutingModule.ts');
+const RouteName: string = argv.r || argv.route;
+const ControllerName: string = argv.c || argv.controller;
+const MiddlewareName: string = argv.middleware;
+const ModuleName: string =  argv.m || argv.module;
+const SetupName: string =  argv.s || argv.setup;
+const flatFile: string = argv.f || argv.flat;
+const target: string = argv.t || argv.target;
 
-if (SetupName) {
-    checkName(SetupName);
+// check if flat was called if not - file will be created in a folder
+let flat;
+if (flatFile === undefined) flat = false;
+else flat = true;
+
+if (SetupName && checkName(SetupName)) {
     createSetup(SetupName);
 }
-if (RouteName) {
-    if (projectCheck) {
-        checkName(RouteName);
-        createRoute(RouteName);
-        addRoute(RouteName);
-        console.log(chalk.green(`Route named ${RouteName} created and added to router module`));
-    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+
+if (ModuleName && checkLiftrProject() && checkName(ModuleName)) {
+    const routeComponentContent = flat ? content.flatRouteContent(ModuleName) : content.routeContent(ModuleName);
+    const testControllerComponentContent = flat ?
+    content.flatTestControllerContent(ModuleName) : content.testControllerContent(ModuleName);
+
+    creationFactory.createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
+    creationFactory.createComponent(ModuleName, routeComponentContent, 'route', flat);
+    creationFactory.createComponent(ModuleName, content.controllerContent(ModuleName), 'controller', flat);
+    creationFactory.createTestFile(ModuleName, testControllerComponentContent, 'controller', flat);
+    addModule(ModuleName, flat);
 }
 
-if (ControllerName) {
-    if (projectCheck) {
-        checkName(ControllerName);
-        createController(ControllerName);
-        console.log(chalk.green(`Controller named ${ControllerName} created`));
-    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target)) {
+    creationFactory.findModuleAndInsertComponents(RouteName, target, flat);
 }
 
-if (MiddlewareName) {
-    if (projectCheck) {
-        checkName(MiddlewareName);
-        createMiddleware(MiddlewareName);
-        console.log(chalk.green(`Middleware named ${MiddlewareName} created`));
-    } else console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
+    const testControllerComponentContent = flat ?
+    content.flatTestControllerContent(ModuleName) : content.testControllerContent(ModuleName);
+    creationFactory.createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
+    creationFactory.createTestFile(ControllerName, testControllerComponentContent, 'controller', flat);
+}
+
+if (MiddlewareName && checkLiftrProject() && checkName(MiddlewareName)) {
+    creationFactory.createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
 }
 
 if (!process.argv.slice(2).length) {

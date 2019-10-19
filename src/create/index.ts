@@ -1,17 +1,9 @@
-import { createApp } from './createApp';
-import { createController } from './createController';
-import { createMiddleware } from './createMiddleware';
-import { createRoute } from './createRoute';
-import { createServer } from './createServer';
-import { createSetup } from './createSetup';
-import { addRoute } from './addRoute';
+import { createSetup } from './create-setup';
+import { addModule } from './add-module';
+import * as creationFactory from './creation-factory';
 
 export {
-    createRoute,
-    createController,
-    createMiddleware,
-    createApp,
-    createServer,
     createSetup,
-    addRoute,
+    addModule,
+    creationFactory,
 };

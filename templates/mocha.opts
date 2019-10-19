@@ -1,6 +1,0 @@
--r ts-node/register test/mocha.require.ts
--r tsconfig-paths/register
--R spec
---recursive
---watch-extensions ts
- src/**/*.spec.ts

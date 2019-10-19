@@ -4,13 +4,11 @@
     <img alt="Liftr logo" src="./logo.png">
 </p>
 
-[![npmversion](https://img.shields.io/npm/v/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr)
-[![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr/blob/master/LICENSE/)
-[![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr)
+[![npmversion](https://img.shields.io/npm/v/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli)
+[![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli/blob/master/LICENSE/)
+[![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli)
 
-The Liftr framework provides structure and tools to build API's in Node.js with [TypeScript](https://www.typescriptlang.org/) and [Express](https://expressjs.com/). **This repo contains the documentation for the CLI.**
-
-The liftr-cli is a quick project-starter CLI to work with the Liftr framework, it will create the necessary files for you to begin a Node.js & Typescript project. Ontop o=, you can generate new backend components on the fly - providing a quicker way to build structured and robust API's.
+The liftr-cli is a quick project-starter CLI to work with the Liftr framework, it will create the necessary files for you to begin a Node.js & Typescript project. Ontop of that, you can generate new backend components on the fly - providing a quicker way to build structured and robust API's.
 
 ## Quickstart
 
@@ -40,17 +38,22 @@ liftr --setup <your-project-name>
 
 # THE FOLLOWING COMMANDS CAN ONLY BE DONE IN A LIFTR SETUP
 -----------------------------------------------------------
+# All files get their own folder in their component folder
+# Using the -f or --flat command skips the folder creation and just creates the files
 
-# Create a route in the routes folder and add it to the routing module
-liftr -r <your-route-name>
-liftr --route <your-route-name>
+# Create a module with its own routes file which provides. The module gets added to the LiftrRoutingModule
+liftr -m <your-module-name>
+liftr --module <your-module-name>
+
+# Create a route in a target route file as well as in the target module (should have the same intial name). This will add the route to the routes file and automatically add it to the module.
+liftr -r <your-route-name> -t <your-target-module-and-routes-file>
+liftr --route <your-route-name> --target <your-target-module-and-routes-file>
 
 # Create a controller in the controller folder
 liftr -c <your-controller-name>
 liftr --controller <your-controller-name>
 
 # Create a middleware in the middleware folder
-liftr -m <your-middleware-name>
 liftr --middleware <your-middleware-name>
 
 ```
@@ -59,14 +62,9 @@ liftr --middleware <your-middleware-name>
 | Package | Description | Version |
 | --- | --- | --- |
 | [@liftr/core](https://github.com/farisT/liftr-core) | The core package for Liftr | [![npmversion](https://img.shields.io/npm/v/@liftr/core.svg?style=for-the-badge)](https://github.com/farisT/liftr-core) |
-| [@liftr/docs](https://github.com/farisT/liftr-docs) | A documentation tool for liftr routes with swagger under the hood | [![npmversion](https://img.shields.io/npm/v/@liftr/docs.svg?style=for-the-badge)](https://github.com/farisT/liftr-docs) |
-| [@liftr/tscov](https://github.com/jeroenouw/liftr-tscov) | Check the type coverage of any TypeScript project | [![npmversion](https://img.shields.io/npm/v/@liftr/tscov.svg?style=for-the-badge)](https://github.com/jeroenouw/liftr-tscov) |
+| [@liftr/tscov](https://github.com/jeroenouw/liftr-tscov) | Check the type coverage of your Liftr project TypeScript project | [![npmversion](https://img.shields.io/npm/v/@liftr/tscov.svg?style=for-the-badge)](https://github.com/jeroenouw/liftr-tscov) |
 
 
 ## Contributing
 
-Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr/issues) and check the [contributing guidelines](https://github.com/farisT/liftr/blob/master/LICENSE/).
-
-## License
-
-
+Want to file a bug, contribute some code, or improve documentation? Feel free to place an [issue](https://github.com/farisT/liftr-cli/issues) and check the [contributing guidelines](https://github.com/farisT/liftr-cli/blob/master/CONTRIBUTING.md/).
