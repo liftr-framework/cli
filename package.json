@@ -12,7 +12,9 @@
   "keywords": [
     "cli",
     "typescript",
-    "nodejs"
+    "nodejs",
+    "framework",
+    "API"
   ],
   "scripts": {
     "start": "npm run build && npm run global",

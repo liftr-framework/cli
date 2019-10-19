@@ -1,9 +1,9 @@
 
 export const moduleContent = (moduleName: string): string => `
-import { Module } from '@liftr/core';
+import { Module, ModuleComponent } from '@liftr/core';
 import { ${moduleName}Route } from './${moduleName}.routes';
 
-export const ${moduleName}Module = Module([
+export const ${moduleName}Module: ModuleComponent = Module([
     {
         route: ${moduleName}Route,
         middleware: [],
