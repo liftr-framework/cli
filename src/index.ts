@@ -65,7 +65,7 @@ if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target
 
 if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
     const testControllerComponentContent = flat ?
-    content.flatTestControllerContent(ModuleName) : content.testControllerContent(ModuleName);
+    content.flatTestControllerContent(ControllerName) : content.testControllerContent(ControllerName);
     creationFactory.createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
     creationFactory.createTestFile(ControllerName, testControllerComponentContent, 'controller', flat);
 }
