@@ -1,4 +1,4 @@
-# Liftr
+# liftr-cli
 
 <p align="center">
     <img alt="Liftr logo" src="./logo.png">

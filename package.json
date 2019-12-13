@@ -1,9 +1,9 @@
 {
   "name": "@liftr/cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "The Liftr CLI provides scaffolding for the Liftr framework",
   "author": "Faris Tangastani",
-  "repository": "https://github.com/farisT/liftr",
+  "repository": "https://github.com/farisT/liftr-cli",
   "license": "MIT",
   "main": "./lib/index.js",
   "bin": {
@@ -19,7 +19,7 @@
   "scripts": {
     "start": "npm run build && npm run global",
     "build": "rm -rf lib && tsc -p .",
-    "link-upstream": "git remote add upstream https://github.com/farisT/liftr",
+    "link-upstream": "git remote add upstream https://github.com/farisT/liftr-cli",
     "sync": "git fetch origin && git checkout master && git pull && git checkout <your-branch> && git merge master && git push",
     "clean": "rm -rf ./lib",
     "global": "npm i -g && liftr",
@@ -35,7 +35,7 @@
     "fs-extra": "^8.0.0",
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
-    "ora": "^3.4.0",
+    "ora": "^4.0.3",
     "path": "^0.12.7",
     "shelljs": "^0.8.3"
   },
