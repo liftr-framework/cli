@@ -1,6 +1,5 @@
 {
     "defaultSeverity": "error",
-    "indent": [true, "tabs", 2],
     "extends": [
         "tslint:recommended"
     ],

@@ -3,9 +3,9 @@ import program from 'commander';
 import minimist from 'minimist';
 import chalk from 'chalk';
 import * as content from './component-content';
-
 import { addModule, createSetup, creationFactory } from './create';
 import { checkName, checkLiftrProject } from './helpers';
+import { command } from './command';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
@@ -17,7 +17,6 @@ console.log(
         figlet.textSync('Liftr', { horizontalLayout: 'full' }),
     ),
 );
-
 program
     .description('The CLI for scaffolding Node/Typescript projects quick in the Liftr Framework')
     .option('-m , --module', 'create a Liftr module with a Routes file')
@@ -30,6 +29,11 @@ program
 
 const argv: minimist.ParsedArgs = minimist(process.argv.slice(2), {'--': true});
 
+console.log(process.argv.slice(2));
+const args = process.argv.slice(2);
+if (args[0] === 'create') {
+    command(args[1]);
+}
 const RouteName: string = argv.r || argv.route;
 const ControllerName: string = argv.c || argv.controller;
 const MiddlewareName: string = argv.middleware;

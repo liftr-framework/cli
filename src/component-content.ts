@@ -65,13 +65,15 @@ const server = Liftr.server(app);
 export default server;
 `;
 
-export const testControllerContent = (controllerName: string): string => `
+export const testControllerContent = (controllerName: string, flat?: boolean): string => `
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { Request, Response, NextFunction } from 'express';
 import { ${controllerName}Controller } from './${controllerName}.controller';
 
-describe('src/controllers/${controllerName}.controller.ts', () => {
+
+describe(${flat ? `src/controllers/${controllerName}/${controllerName}.controller.ts` :
+`src/controllers/${controllerName}.controller.ts`}, () => {
     let sandbox: sinon.SinonSandbox;
     let req: any = {};
     let responseStub: Partial<Response>;
