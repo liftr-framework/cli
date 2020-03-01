@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 
 export const moduleContent = (moduleName: string): string => `
 import { Module, ModuleComponent } from '@liftr/core';
@@ -19,9 +20,9 @@ export const ${middlewareName}Middleware = (req: Request, res: Response, next: N
 };
 `;
 
-export const routeContent = (routeName: string): string => `
+export const routeContent = (routeName: string, flat?: boolean): string => `
 import { Route } from '@liftr/core';
-import { ${routeName}Controller } from '@controllers/${routeName}/${routeName}.controller';
+${flat ? `import { ${routeName}Controller } from '@controllers/${routeName}.controller';` : `import { ${routeName}Controller } from '@controllers/${routeName}/${routeName}.controller'`};
 
 export const ${routeName}Route = Route.get('/', ${routeName}Controller);
 `;
@@ -64,7 +65,6 @@ const server = Liftr.server(app);
 
 export default server;
 `;
-
 export const testControllerContent = (controllerName: string, flat?: boolean): string => `
 import * as sinon from 'sinon';
 import { expect } from 'chai';
@@ -72,8 +72,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ${controllerName}Controller } from './${controllerName}.controller';
 
 
-describe(${flat ? `src/controllers/${controllerName}/${controllerName}.controller.ts` :
-`src/controllers/${controllerName}.controller.ts`}, () => {
+describe(${flat ? `src/controllers/${controllerName}/${controllerName}.controller.ts` : `src/controllers/${controllerName}.controller.ts`}, () => {
     let sandbox: sinon.SinonSandbox;
     let req: any = {};
     let responseStub: Partial<Response>;

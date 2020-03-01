@@ -21,7 +21,7 @@ export const checkLiftrProject =  (): boolean =>  {
 export const folderExists = async (path: string): Promise<boolean> => !!(await stat(path).catch(() => false));
 
 export async function creation(dirpath: string, filePath: string, fileContent: string): Promise<void> {
-    const folderBlackList = [
+    const folderBlackList: string[] = [
         process.cwd() + '/src/middlewares',
         process.cwd() + '/src/routes',
         process.cwd() + '/src/controllers',
