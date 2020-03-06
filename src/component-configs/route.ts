@@ -1,21 +1,17 @@
-import { addModule } from '../create';
 import { ComponentConfig } from '../types/component-config';
-import { controllerContent, moduleContent, routeContent, testControllerContent } from '../component-content';
+import { controllerContent, routeContent, testControllerContent } from '../component-content';
+import { findModuleAndInsertComponents } from '../create/creation-factory';
 
 const config: ComponentConfig = {
-  content: moduleContent,
+  content: routeContent,
   dependentComponents: [
     {
       componentType: 'controller',
       content: controllerContent,
       testFileContent: testControllerContent,
     },
-    {
-      componentType: 'route',
-      content: routeContent,
-    },
   ],
-  insertFunction: addModule,
+  insertFunction: findModuleAndInsertComponents,
 };
 
 module.exports = config;

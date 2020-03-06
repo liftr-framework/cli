@@ -51,32 +51,32 @@ if (SetupName && checkName(SetupName)) {
     createSetup(SetupName);
 }
 
-if (ModuleName && checkLiftrProject() && checkName(ModuleName)) {
-    const routeComponentContent = flat ? content.flatRouteContent(ModuleName) : content.routeContent(ModuleName);
-    const testControllerComponentContent = flat ?
-    content.flatTestControllerContent(ModuleName) : content.testControllerContent(ModuleName);
+// if (ModuleName && checkLiftrProject() && checkName(ModuleName)) {
+//     const routeComponentContent = flat ? content.flatRouteContent(ModuleName) : content.routeContent(ModuleName);
+//     const testControllerComponentContent = flat ?
+//     content.flatTestControllerContent(ModuleName) : content.testControllerContent(ModuleName);
 
-    creationFactory.createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
-    creationFactory.createComponent(ModuleName, routeComponentContent, 'route', flat);
-    creationFactory.createComponent(ModuleName, content.controllerContent(ModuleName), 'controller', flat);
-    creationFactory.createTestFile(ModuleName, testControllerComponentContent, 'controller', flat);
-    addModule(ModuleName, flat);
-}
+//     creationFactory.createComponent(ModuleName, content.moduleContent(ModuleName), 'module', flat);
+//     creationFactory.createComponent(ModuleName, routeComponentContent, 'route', flat);
+//     creationFactory.createComponent(ModuleName, content.controllerContent(ModuleName), 'controller', flat);
+//     creationFactory.createTestFile(ModuleName, testControllerComponentContent, 'controller', flat);
+    // addModule(ModuleName, flat);
+// }
 
-if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target)) {
-    creationFactory.findModuleAndInsertComponents(RouteName, target, flat);
-}
+// if (RouteName && checkLiftrProject() && checkName(RouteName) && checkName(target)) {
+//     creationFactory.findModuleAndInsertComponents(RouteName, target, flat);
+// }
 
-if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
-    const testControllerComponentContent = flat ?
-    content.flatTestControllerContent(ControllerName) : content.testControllerContent(ControllerName);
-    creationFactory.createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
-    creationFactory.createTestFile(ControllerName, testControllerComponentContent, 'controller', flat);
-}
+// if (ControllerName && checkLiftrProject() && checkName(ControllerName)) {
+//     const testControllerComponentContent = flat ?
+//     content.flatTestControllerContent(ControllerName) : content.testControllerContent(ControllerName);
+//     creationFactory.createComponent(ControllerName, content.controllerContent(ControllerName), 'controller', flat);
+//     creationFactory.createTestFile(ControllerName, testControllerComponentContent, 'controller', flat);
+// }
 
-if (MiddlewareName && checkLiftrProject() && checkName(MiddlewareName)) {
-    creationFactory.createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
-}
+// if (MiddlewareName && checkLiftrProject() && checkName(MiddlewareName)) {
+//     creationFactory.createComponent(MiddlewareName, content.middleWareContent(MiddlewareName), 'middleware', flat);
+// }
 
 if (!process.argv.slice(2).length) {
     program.outputHelp();

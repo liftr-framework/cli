@@ -1,12 +1,16 @@
+import { QuestionCollection } from 'inquirer';
+
 export interface ComponentConfig {
   content: (name: string, flat: boolean) => string;
   dependentComponents: DependentComponents[];
-  testFile: boolean;
-  insertFunction: (name: string, flat: boolean) => Promise<void>;
+  testFileContent?: (name: string, flat: boolean) => string;
+  extraQuestions?: QuestionCollection;
+  insertFunction?(name: string, flat: boolean): any;
+  insertFunction?(name: string, flat: boolean, targetName?: string): void;
 }
 
 export interface DependentComponents {
   componentType: string;
   content: (name: string, flat: boolean) => string;
-  testFile: boolean;
+  testFileContent?: (name: string, flat: boolean) => string;
 }

@@ -40,12 +40,12 @@ export async function createTestFile({name, content, extension, flatFile}: Creat
         await creation(folderPath, filePath, content);
         console.log(chalk.green(`Liftr ${extension} spec file named ${name} created`));
     } catch (error) {
-        console.error('An error has occured with creating the Liftr component', error);
+        console.error('An error has occured with creating the Liftr component spec file', error);
         process.exit(1);
     }
 }
 
-export function findModuleAndInsertComponents(name: string, targetModuleName: string, flatFile: boolean): void {
+export function findModuleAndInsertComponents(name: string, flatFile: boolean, targetModuleName?: string): void {
     const modulePath = `/src/routes/**/${targetModuleName}.module.ts`;
     const routePath = `/src/routes/**/${targetModuleName}.routes.ts`;
     const content = testControllerContent(name, flatFile);

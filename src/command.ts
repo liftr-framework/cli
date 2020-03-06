@@ -7,44 +7,49 @@ import { checkLiftrProject } from './helpers';
 
 const components = ['module', 'route', 'middleware', 'controller'];
 
-export async function command(arg: string) {
+export async function command(componentType: string) {
     // maybe build handle error function based of arguements
     // dont throw error? just end process with log statement
-    if (!arg) throw Error('No arguement passed');
-    if (!components.includes(arg)) throw Error('This is not an available component. List of available components...');
+    if (!componentType) throw Error('No arguement passed');
+    if (!components.includes(componentType)) {
+      throw Error('This is not an available component. List of available components...');
+    }
     if (!checkLiftrProject()) process.exit(1);
-    const { componentName, flatFile }: { componentName: string, flatFile: boolean } = await inquirer.prompt([
+    const { componentName, createFolder }: { componentName: string, createFolder: boolean } = await inquirer.prompt([
         {
-          message: `Name of the ${arg}`,
+          message: `Name of the ${componentType}`,
           name: 'componentName',
           type: 'input',
         },
         {
-          message: `Create a new folder for the ${arg}?`,
-          name: 'flatFile',
+          message: `Create a new folder for the ${componentType}?`,
+          name: 'createFolder',
           type: 'confirm',
         },
     ]);
-    const configPath = loadConfig(arg);
+    const flatFile: boolean = !createFolder;
+    const configPath = loadConfig(componentType);
     const config: ComponentConfig = require(`./component-configs/${configPath}`);
     const dependentComponents: DependentComponents[] = config.dependentComponents;
-    const componentContent = config.content(componentName, flatFile);
-    await creationFactory.createComponent({
+    const componentContent: string = config.content(componentName, flatFile);
+    creationFactory.createComponent({
       name: componentName,
       content: componentContent,
-      extension: arg,
+      extension: componentType,
       flatFile,
     });
+    // insert the main component
+    if (config.insertFunction) config.insertFunction(componentName, flatFile);
     // The rest of the dependent components
     for (const component of dependentComponents) {
-      await creationFactory.createComponent({
+      creationFactory.createComponent({
         name: componentName,
         content: component.content(componentName, flatFile),
         extension: component.componentType,
         flatFile,
       });
-      if (component.testFile) {
-        await creationFactory.createTestFile({
+      if (component.testFileContent) {
+        creationFactory.createTestFile({
           name: componentName,
           content: component.content(componentName, flatFile),
           extension: component.componentType,
