@@ -1,6 +1,6 @@
 // tslint:disable:max-line-length
 
-export const moduleContent = (moduleName: string): string => `
+export const moduleContent = (moduleName: string, flat: boolean): string => `
 import { Module, ModuleComponent } from '@liftr/core';
 import { ${moduleName}Route } from './${moduleName}.routes';
 
@@ -12,7 +12,7 @@ export const ${moduleName}Module: ModuleComponent = Module([
 ])
 `;
 
-export const middleWareContent = (middlewareName: string): string => `
+export const middleWareContent = (middlewareName: string, flat: boolean): string => `
 import { Request, Response, NextFunction } from 'express';
 
 export const ${middlewareName}Middleware = (req: Request, res: Response, next: NextFunction) => {
@@ -20,7 +20,7 @@ export const ${middlewareName}Middleware = (req: Request, res: Response, next: N
 };
 `;
 
-export const routeContent = (routeName: string, flat?: boolean): string => `
+export const routeContent = (routeName: string, flat: boolean): string => `
 import { Route } from '@liftr/core';
 ${flat ? `import { ${routeName}Controller } from '@controllers/${routeName}.controller';` : `import { ${routeName}Controller } from '@controllers/${routeName}/${routeName}.controller'`};
 
@@ -34,7 +34,7 @@ import { ${routeName}Controller } from '@controllers/${routeName}.controller';
 export const ${routeName}Route = Route.get('/', ${routeName}Controller);
 `;
 
-export const controllerContent = (controllerName: string): string => `
+export const controllerContent = (controllerName: string, flat: boolean): string => `
 import { Request, Response, NextFunction } from 'express';
 
 export const ${controllerName}Controller = (req: Request, res: Response, next: NextFunction) => {
@@ -65,7 +65,7 @@ const server = Liftr.server(app);
 
 export default server;
 `;
-export const testControllerContent = (controllerName: string, flat?: boolean): string => `
+export const testControllerContent = (controllerName: string, flat: boolean): string => `
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { Request, Response, NextFunction } from 'express';

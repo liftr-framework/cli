@@ -4,9 +4,16 @@ import chalk from 'chalk';
 import glob from 'glob';
 import { addRouteToFile } from './add-route-to-file';
 import { addRouteToModule } from './add-route-to-module';
-import { controllerContent, testControllerContent, flatTestControllerContent } from '../component-content';
+import { controllerContent, testControllerContent } from '../component-content';
 
-export async function createComponent(name: string, content: string, extension: string, flatFile: boolean) {
+interface CreateParameters {
+  name: string;
+  content: string;
+  extension: string;
+  flatFile: boolean;
+}
+
+export async function createComponent({name, content, extension, flatFile}: CreateParameters) {
     try {
         const rawPath = flatFile ? `/src/${extension}s` : `/src/${extension}s/${name}`;
         // module should have a path to the route folder instead of creating a  new 'modules' folder
@@ -24,7 +31,7 @@ export async function createComponent(name: string, content: string, extension: 
     }
 }
 
-export async function createTestFile(name: string, content: string, extension: string, flatFile: boolean) {
+export async function createTestFile({name, content, extension, flatFile}: CreateParameters) {
     try {
         const rawPath = flatFile ? `/src/${extension}s` : `/src/${extension}s/${name}`;
         const ext = extension === 'route' ? 'routes' : extension;
@@ -38,23 +45,33 @@ export async function createTestFile(name: string, content: string, extension: s
     }
 }
 
-export async function findModuleAndInsertComponents(newName: string, targetFileName: string, flatFile: boolean) {
-    const modulePath = `/src/routes/**/${targetFileName}.module.ts`;
-    const routePath = `/src/routes/**/${targetFileName}.routes.ts`;
-    const testControllerComponentContent = testControllerContent(newName, flatFile);
-    if (targetFileName) {
+export function findModuleAndInsertComponents(name: string, targetModuleName: string, flatFile: boolean): void {
+    const modulePath = `/src/routes/**/${targetModuleName}.module.ts`;
+    const routePath = `/src/routes/**/${targetModuleName}.routes.ts`;
+    const content = testControllerContent(name, flatFile);
+    if (targetModuleName) {
         glob(process.cwd() +  modulePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
             if (path) {
-                addRouteToModule(newName, targetFileName, filePath);
+                addRouteToModule(name, targetModuleName, filePath);
             }
         });
         glob(process.cwd() +  routePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
             if (path) {
-                addRouteToFile(newName, filePath, flatFile);
-                createComponent(newName, controllerContent(newName), 'controller', flatFile);
-                createTestFile(newName, testControllerComponentContent, 'controller', flatFile);
+                addRouteToFile(name, filePath, flatFile);
+                createComponent({
+                  name,
+                  content: controllerContent(name, flatFile),
+                  extension: 'controller',
+                  flatFile,
+                });
+                createTestFile({
+                  name,
+                  content,
+                  extension: 'controller',
+                  flatFile,
+                });
             }
         });
     } else throw new Error('Target file not specified');
