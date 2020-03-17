@@ -11,6 +11,14 @@ const config: ComponentConfig = {
       testFileContent: testControllerContent,
     },
   ],
+  extraQuestions: (moduleList: string[]) => [
+    {
+      message: 'Which module would you like to insert in',
+      name: 'selectedAnswer',
+      type: 'list',
+      choices: [...moduleList],
+    },
+  ],
   insertFunction: findModuleAndInsertComponents,
 };
 

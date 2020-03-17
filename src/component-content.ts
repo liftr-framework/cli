@@ -72,7 +72,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ${controllerName}Controller } from './${controllerName}.controller';
 
 
-describe(${flat ? `src/controllers/${controllerName}/${controllerName}.controller.ts` : `src/controllers/${controllerName}.controller.ts`}, () => {
+describe(${flat ? `'src/controllers/${controllerName}/${controllerName}.controller.ts'` : `'src/controllers/${controllerName}.controller.ts'`}, () => {
     let sandbox: sinon.SinonSandbox;
     let req: any = {};
     let responseStub: Partial<Response>;
