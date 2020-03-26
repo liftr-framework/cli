@@ -27,13 +27,6 @@ ${flat ? `import { ${routeName}Controller } from '@controllers/${routeName}.cont
 export const ${routeName}Route = Route.get('/', ${routeName}Controller);
 `;
 
-export const flatRouteContent = (routeName: string): string => `
-import { Route } from '@liftr/core';
-import { ${routeName}Controller } from '@controllers/${routeName}.controller';
-
-export const ${routeName}Route = Route.get('/', ${routeName}Controller);
-`;
-
 export const controllerContent = (controllerName: string, flat: boolean): string => `
 import { Request, Response, NextFunction } from 'express';
 
@@ -65,6 +58,7 @@ const server = Liftr.server(app);
 
 export default server;
 `;
+
 export const testControllerContent = (controllerName: string, flat: boolean): string => `
 import * as sinon from 'sinon';
 import { expect } from 'chai';
@@ -72,9 +66,9 @@ import { Request, Response, NextFunction } from 'express';
 import { ${controllerName}Controller } from './${controllerName}.controller';
 
 
-describe(${flat ? `'src/controllers/${controllerName}/${controllerName}.controller.ts'` : `'src/controllers/${controllerName}.controller.ts'`}, () => {
+describe(${flat ? `'src/controllers/${controllerName}.controller.ts'` : `'src/controllers/${controllerName}/${controllerName}.controller.ts'`}, () => {
     let sandbox: sinon.SinonSandbox;
-    let req: any = {};
+    let req: Partial<Request> = {};
     let responseStub: Partial<Response>;
     let next: Partial<NextFunction>;
     beforeEach(() => {
@@ -91,27 +85,29 @@ describe(${flat ? `'src/controllers/${controllerName}/${controllerName}.controll
 });
 `;
 
-export const flatTestControllerContent = (controllerName: string): string => `
+export const testMiddleWareContent = (middlewareName: string, flat: boolean): string => `
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { Request, Response, NextFunction } from 'express';
-import { ${controllerName}Controller } from './${controllerName}.controller';
+import { ${middlewareName}Middleware } from './${middlewareName}.middleware';
 
-describe('src/controllers/${controllerName}/${controllerName}.controller.ts', () => {
+describe(${flat ? `'src/middlewares/${middlewareName}.middleware.ts'` : `'src/middlewares/${middlewareName}/${middlewareName}.middleware.ts'`}, () => {
+    const nextResponse = 'next!';
     let sandbox: sinon.SinonSandbox;
-    let req: any = {};
+    let req: Partial<Request> = {};
     let responseStub: Partial<Response>;
-    let next: Partial<NextFunction>;
+    let nextStub: sinon.SinonStub;
     beforeEach(() => {
         sandbox = sinon.createSandbox();
         responseStub = {
             send: sandbox.stub(),
         }
+        nextStub = sinon.stub().returns(nextResponse);
     });
 
-    it('should send a message' , () => {
-        ${controllerName}Controller(req as Request, responseStub as Response, next as NextFunction);
-        expect(responseStub.send).to.be.calledWith('Lift off!');
+    it('should call next' , () => {
+        ${middlewareName}Middleware(req as Request, responseStub as Response, nextStub as NextFunction);
+        expect(nextStub).to.be.called;
     });
 });
 `;

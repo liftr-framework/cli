@@ -1,12 +1,10 @@
-import inquirer, { Answers } from 'inquirer';
-import { creationFactory } from './create';
-import fs from 'fs-extra';
-import path from 'path';
-import glob from 'glob';
+import inquirer from 'inquirer';
+import { creationFactory, createSetup } from './create';
 import { ComponentConfig, DependentComponents } from './types/component-config';
-import { checkLiftrProject } from './helpers';
+import { checkLiftrProject, loadConfig, getModuleFiles } from './helpers';
+import chalk from 'chalk';
 
-const components = ['module', 'route', 'middleware', 'controller'];
+const components = ['module', 'route', 'middleware', 'controller', 'setup'];
 
 export async function command(componentType: string) {
   try {
@@ -17,6 +15,23 @@ export async function command(componentType: string) {
       throw Error('This is not an available component. List of available components...');
     }
     if (!checkLiftrProject()) process.exit(1);
+    if (componentType === 'setup') {
+      const { projectName }: inquirer.Answers = await inquirer.prompt([
+        {
+          message: 'Name of the project',
+          name: 'projectName',
+          type: 'input',
+          validate: (input) => {
+            if (!input) {
+              console.error(chalk.yellow('Every great project needs a name'));
+              return false;
+            }
+            return true;
+          },
+        },
+    ]);
+      return await createSetup(projectName);
+    }
     const configPath = loadConfig(componentType);
     const moduleFiles = await getModuleFiles();
     const config: ComponentConfig = require(`./component-configs/${configPath}`);
@@ -27,11 +42,12 @@ export async function command(componentType: string) {
           type: 'input',
         },
         {
-          message: `Create a new folder for the ${componentType}?`,
+          message: `Create a new folder for the ${componentType} and its dependent components?`,
           name: 'createFolder',
           type: 'confirm',
         },
     ]);
+
     let selectedFile: any;
     if (config.extraQuestions) {
       const questions = config.extraQuestions(moduleFiles);
@@ -41,12 +57,24 @@ export async function command(componentType: string) {
     const flatFile: boolean = !createFolder;
     const dependentComponents: DependentComponents[] = config.dependentComponents;
     const componentContent: string = config.content(componentName, flatFile);
-    creationFactory.createComponent({
-      name: componentName,
-      content: componentContent,
-      extension: componentType,
-      flatFile,
-    });
+
+    // routes can only be "inserted", to create a new routes file you need to create a module
+    if (componentType !== 'route') {
+      creationFactory.createComponent({
+        name: componentName,
+        content: componentContent,
+        extension: componentType,
+        flatFile,
+      });
+      if (config.testFileContent) {
+        creationFactory.createTestFile({
+          name: componentName,
+          content: config.testFileContent(componentName, flatFile),
+          extension: componentType,
+          flatFile,
+        });
+      }
+    }
     // insert the main component
     if (config.insertFunction) config.insertFunction(componentName, flatFile, selectedFile);
     // The rest of the dependent components
@@ -69,19 +97,4 @@ export async function command(componentType: string) {
   } catch (error) {
     console.error('An error occured with creating a component', error);
   }
-}
-
-function loadConfig(componentType: string) {
-  return glob.sync(`${componentType}.?s`, {
-    cwd: path.resolve(`${__dirname}/component-configs`),
-  });
-}
-
-async function getModuleFiles() {
-  const sourceFolder = path.join(process.cwd(), '/src/routes/');
-  const files = await fs.readdir(sourceFolder);
-  const moduleFiles = files.filter((name: string) => name.includes('.module'))
-    .map((module) => module.replace('.module.ts', ''));
-
-  return moduleFiles;
 }

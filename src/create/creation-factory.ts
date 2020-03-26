@@ -31,7 +31,7 @@ export async function createComponent({name, content, extension, flatFile}: Crea
     }
 }
 
-export async function createTestFile({name, content, extension, flatFile}: CreateParameters) {
+export async function createTestFile({ name, content, extension, flatFile }: CreateParameters) {
     try {
         const rawPath = flatFile ? `/src/${extension}s` : `/src/${extension}s/${name}`;
         const ext = extension === 'route' ? 'routes' : extension;
@@ -48,7 +48,6 @@ export async function createTestFile({name, content, extension, flatFile}: Creat
 export function findModuleAndInsertComponents(name: string, flatFile: boolean, targetModuleName?: string): void {
     const modulePath = `/src/routes/**/${targetModuleName}.module.ts`;
     const routePath = `/src/routes/**/${targetModuleName}.routes.ts`;
-    const content = testControllerContent(name, flatFile);
     if (targetModuleName) {
         glob(process.cwd() +  modulePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
@@ -68,7 +67,7 @@ export function findModuleAndInsertComponents(name: string, flatFile: boolean, t
                 });
                 createTestFile({
                   name,
-                  content,
+                  content: testControllerContent(name, flatFile),
                   extension: 'controller',
                   flatFile,
                 });

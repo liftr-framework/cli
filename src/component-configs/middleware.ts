@@ -1,8 +1,9 @@
 import { ComponentConfig } from '../types/component-config';
-import { middleWareContent } from '../component-content';
+import { middleWareContent, testMiddleWareContent } from '../component-content';
 
 const config: ComponentConfig = {
   content: middleWareContent,
+  testFileContent: testMiddleWareContent,
   dependentComponents: [],
 };
 

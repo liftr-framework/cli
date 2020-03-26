@@ -5,11 +5,6 @@ import { findModuleAndInsertComponents } from '../create/creation-factory';
 const config: ComponentConfig = {
   content: routeContent,
   dependentComponents: [
-    {
-      componentType: 'controller',
-      content: controllerContent,
-      testFileContent: testControllerContent,
-    },
   ],
   extraQuestions: (moduleList: string[]) => [
     {
