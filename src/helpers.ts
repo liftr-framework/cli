@@ -4,11 +4,12 @@ import fs from 'fs-extra';
 import path from 'path';
 import glob from 'glob';
 
-export const checkLiftrProject =  (): boolean =>  {
+export const checkLiftrProject =  (componentType: string): boolean =>  {
     const routingModulepath = '/src/routes/LiftrRoutingModule.ts';
-    if (existsSync(process.cwd() + routingModulepath)) return true;
+    if (existsSync(process.cwd() + routingModulepath) || componentType === 'setup') return true;
     else {
-        console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+        console.error(chalk.red('This is not a Liftr project'));
+        console.error(chalk.red('Only setup can run outside of a Liftr project'));
         return false;
     }
 };

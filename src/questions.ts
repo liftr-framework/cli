@@ -1,5 +1,7 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import { ComponentConfig } from './types/component-config';
+import { getModuleFiles } from './helpers';
 
 export async function askRequiredQuestions(componentType: string): Promise<inquirer.Answers> {
   return await inquirer.prompt([
@@ -34,4 +36,34 @@ export async function askSetupQuestions(): Promise<inquirer.Answers> {
       },
     },
 ]);
+}
+
+export async function askComponentType(possibleComponents: string[]): Promise<inquirer.Answers> {
+  return await inquirer.prompt([
+    {
+      message: 'What Liftr component would you like to create?',
+      name: 'componentChoice',
+      type: 'list',
+      choices: possibleComponents,
+    },
+]);
+}
+
+interface ExtraQuestionsAndInsertParams {
+  componentName: string;
+  flatFile: boolean;
+}
+
+export async function extraQuestionsAndInsertFunction(
+  config: ComponentConfig,
+  { componentName, flatFile }: ExtraQuestionsAndInsertParams): Promise<void> {
+  let selectedFile: any;
+  if (config.extraQuestions) {
+    const moduleFiles = await getModuleFiles();
+    const questions = config.extraQuestions(moduleFiles);
+    const { selectedAnswer } = await inquirer.prompt(questions);
+    selectedFile = selectedAnswer;
+  }
+
+  if (config.insertFunction) config.insertFunction(componentName, flatFile, selectedFile);
 }

@@ -1,25 +1,18 @@
 import { createSetup } from './create';
 import { ComponentConfig, DependentComponents } from './types/component-config';
-import { checkLiftrProject, loadConfig, getModuleFiles } from './helpers';
-import chalk from 'chalk';
+import { loadConfig } from './helpers';
 import { createDependentComponents } from './create/create-dependent-components';
 import { createMainComponent } from './create/create-main-component';
 import inquirer from 'inquirer';
-import { askRequiredQuestions, askSetupQuestions } from './questions';
-
-const components = ['module', 'route', 'middleware', 'controller', 'setup'];
+import { askRequiredQuestions,
+  askSetupQuestions,
+  extraQuestionsAndInsertFunction,
+} from './questions';
 
 export async function command(componentType: string) {
   try {
-    // maybe build handle error function based of arguements
-    // dont throw error? just end process with log statement
-    if (!componentType) throw Error('No arguement passed');
-    if (!components.includes(componentType)) {
-      throw Error('This is not an available component');
-    }
-    if (!checkLiftrProject()) process.exit(1);
     if (componentType === 'setup') {
-      const { projectName }: inquirer.Answers = askSetupQuestions();
+      const { projectName }: inquirer.Answers = await askSetupQuestions();
       return await createSetup(projectName);
     }
     const configPath = loadConfig(componentType);
@@ -27,23 +20,15 @@ export async function command(componentType: string) {
     // load the components config based in ./component-configs
     const config: ComponentConfig = require(`./component-configs/${configPath}`);
     const { componentName, flatFile }: inquirer.Answers = await askRequiredQuestions(componentType);
+    const dependentComponents: DependentComponents[] = config.dependentComponents;
 
-    let selectedFile: any;
-    if (config.extraQuestions) {
-      const moduleFiles = await getModuleFiles();
-      const questions = config.extraQuestions(moduleFiles);
-      const { selectedAnswer } = await inquirer.prompt(questions);
-      selectedFile = selectedAnswer;
-    }
-
+    await extraQuestionsAndInsertFunction(config, {componentName, flatFile});
     // routes can only be "inserted", to create a new routes file you need to create a module
     if (componentType !== 'route') {
       createMainComponent({ componentName, config, componentType, flatFile });
     }
 
-    if (config.insertFunction) config.insertFunction(componentName, flatFile, selectedFile);
     // Create the dependent components
-    const dependentComponents: DependentComponents[] = config.dependentComponents;
     createDependentComponents({ componentName, flatFile, dependentComponents });
   } catch (error) {
     console.error('An error occured with creating a component', error);
