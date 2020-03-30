@@ -15,6 +15,7 @@ console.log(
 );
 program
     .description('The CLI for scaffolding Node/Typescript projects quick in the Liftr Framework')
+    .option('create', 'choose a component to create')
     .option('create module', 'create a Liftr module with a Routes file')
     .option('create route', 'create a route in target file and add it to its module')
     .option('create controller', 'create a controller file')

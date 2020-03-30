@@ -12,11 +12,8 @@ export async function askRequiredQuestions(componentType: string): Promise<inqui
     },
     {
       message: `Create a new folder for the ${componentType} and its dependent components?`,
-      name: 'flatFile',
+      name: 'createFolder',
       type: 'confirm',
-      filter: (input) => {
-        return !input;
-      },
     },
   ]);
 }
@@ -57,13 +54,16 @@ interface ExtraQuestionsAndInsertParams {
 export async function extraQuestionsAndInsertFunction(
   config: ComponentConfig,
   { componentName, flatFile }: ExtraQuestionsAndInsertParams): Promise<void> {
+  let endpointMethod: any;
   let selectedFile: any;
   if (config.extraQuestions) {
+    // necessary for chosing which module to insert into
     const moduleFiles = await getModuleFiles();
     const questions = config.extraQuestions(moduleFiles);
-    const { selectedAnswer } = await inquirer.prompt(questions);
-    selectedFile = selectedAnswer;
+    const { selectedAnswerOne, selectedAnswerTwo } = await inquirer.prompt(questions);
+    endpointMethod = selectedAnswerOne;
+    selectedFile = selectedAnswerTwo;
   }
 
-  if (config.insertFunction) config.insertFunction(componentName, flatFile, selectedFile);
+  if (config.insertFunction) config.insertFunction(componentName, flatFile, selectedFile, endpointMethod);
 }

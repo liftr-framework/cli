@@ -24,7 +24,7 @@ export async function createComponent({name, content, extension, flatFile}: Crea
         const folderPath = path.join(process.cwd(), checkedPath);
         const filePath = path.join(process.cwd(), checkedPath, `/${name}.${ext}.ts`);
         await creation(folderPath, filePath, content);
-        console.log(chalk.green(`Liftr ${extension} named ${name} created`));
+        console.log(chalk.green(`Liftr ${extension} named ${name} created at ${filePath}`));
     } catch (error) {
         console.error('An error has occured with creating the Liftr component', error);
         process.exit(1);
@@ -38,14 +38,18 @@ export async function createTestFile({ name, content, extension, flatFile }: Cre
         const folderPath = path.join(process.cwd(), rawPath);
         const filePath = path.join(process.cwd(), rawPath, `/${name}.${ext}.spec.ts`);
         await creation(folderPath, filePath, content);
-        console.log(chalk.green(`Liftr ${extension} spec file named ${name} created`));
+        console.log(chalk.green(`Liftr ${extension} spec file named ${name} created at ${filePath}`));
     } catch (error) {
         console.error('An error has occured with creating the Liftr component spec file', error);
         process.exit(1);
     }
 }
 
-export function findModuleAndInsertComponents(name: string, flatFile: boolean, targetModuleName?: string): void {
+export function findModuleAndInsertComponents(
+  name: string,
+  flatFile: boolean,
+  targetModuleName?: string,
+  endpointMethod?: string): void {
     const modulePath = `/src/routes/**/${targetModuleName}.module.ts`;
     const routePath = `/src/routes/**/${targetModuleName}.routes.ts`;
     if (targetModuleName) {
@@ -58,7 +62,7 @@ export function findModuleAndInsertComponents(name: string, flatFile: boolean, t
         glob(process.cwd() +  routePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
             if (path) {
-                addRouteToFile(name, filePath, flatFile);
+                addRouteToFile({name, filePath, flatFile, endpointMethod});
                 createComponent({
                   name,
                   content: controllerContent(name, flatFile),

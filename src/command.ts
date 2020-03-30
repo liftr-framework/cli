@@ -19,8 +19,9 @@ export async function command(componentType: string) {
 
     // load the components config based in ./component-configs
     const config: ComponentConfig = require(`./component-configs/${configPath}`);
-    const { componentName, flatFile }: inquirer.Answers = await askRequiredQuestions(componentType);
+    const { componentName, createFolder }: inquirer.Answers = await askRequiredQuestions(componentType);
     const dependentComponents: DependentComponents[] = config.dependentComponents;
+    const flatFile: boolean = !createFolder;
 
     await extraQuestionsAndInsertFunction(config, {componentName, flatFile});
     // routes can only be "inserted", to create a new routes file you need to create a module
