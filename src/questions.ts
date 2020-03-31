@@ -3,12 +3,17 @@ import chalk from 'chalk';
 import { ComponentConfig } from './types/component-config';
 import { getModuleFiles } from './helpers';
 
+function sanitizeComponentName(name: string) {
+  return name.split('').filter((split) => split !== '-').join('');
+}
+
 export async function askRequiredQuestions(componentType: string): Promise<inquirer.Answers> {
   return await inquirer.prompt([
     {
       message: `Name of the ${componentType}`,
       name: 'componentName',
       type: 'input',
+      filter: (input) => sanitizeComponentName(input),
     },
     {
       message: `Create a new folder for the ${componentType} and its dependent components?`,

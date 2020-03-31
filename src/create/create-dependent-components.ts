@@ -15,14 +15,14 @@ export function createDependentComponents({
   for (const component of dependentComponents) {
     creationFactory.createComponent({
       name: componentName,
-      content: component.content(name, flatFile),
+      content: component.content(componentName, flatFile),
       extension: component.componentType,
       flatFile,
     });
     if (component.testFileContent) {
       creationFactory.createTestFile({
         name: componentName,
-        content: component.testFileContent(name, flatFile),
+        content: component.testFileContent(componentName, flatFile),
         extension: component.componentType,
         flatFile,
       });

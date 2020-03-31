@@ -17,7 +17,6 @@ export const createSetup = async (setupName: string) => {
             return;
           }
           spinner.succeed(chalk.green(`Your Liftr project is ready! cd into ${setupName} and run npm start.`));
-          // old warning - (check if ts-node is necessary)
           spinner.info(
             chalk.blue(
               'Make sure you have typscript installed on your machine.',

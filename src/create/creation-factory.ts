@@ -55,13 +55,13 @@ export function findModuleAndInsertComponents(
     if (targetModuleName) {
         glob(process.cwd() +  modulePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
-            if (path) {
+            if (filePath) {
                 addRouteToModule(name, targetModuleName, filePath);
             }
         });
         glob(process.cwd() +  routePath, {}, (err, filePaths: string[]) => {
             const filePath = filePaths[0];
-            if (path) {
+            if (filePath) {
                 addRouteToFile({name, filePath, flatFile, endpointMethod});
                 createComponent({
                   name,

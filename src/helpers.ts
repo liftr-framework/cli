@@ -1,8 +1,9 @@
 import chalk from 'chalk';
 import { existsSync, stat, writeFile, outputFile } from 'fs-extra';
-import fs from 'fs-extra';
 import path from 'path';
 import glob from 'glob';
+import fs from 'fs-extra';
+import fastGlob from 'fast-glob';
 
 export const checkLiftrProject =  (componentType: string): boolean =>  {
     const routingModulepath = '/src/routes/LiftrRoutingModule.ts';
@@ -27,7 +28,6 @@ export async function creation(dirpath: string, filePath: string, fileContent: s
     const arrayContainsFolder = (folderBlackList.indexOf(dirpath) > -1);
     if (arrayContainsFolder) {
         // this path taken if there is --flat command passed (only create files no folder)
-        console.log(filePath);
         const exists: Boolean = await folderExists(filePath);
         if (!exists) {
             await writeFile(filePath, fileContent);
@@ -48,10 +48,15 @@ export function loadConfig(componentType: string) {
 }
 
 export async function getModuleFiles(): Promise<string[]> {
-  const sourceFolder = path.join(process.cwd(), '/src/routes/');
-  const files = await fs.readdir(sourceFolder);
-  const moduleFiles = files.filter((name: string) => name.includes('.module'))
-    .map((module) => module.replace('.module.ts', ''));
-
-  return moduleFiles;
+  const modules: string[] = await fastGlob(['**'], {
+    cwd: process.cwd() + '/src/routes/',
+  });
+  return modules.filter((name: string) => name
+    .includes('.module'))
+    .map((fileName: string) => {
+      const file = fileName.replace('.module.ts', '');
+      if (file.includes('/')) {
+        return file.split('/')[1];
+      } else return file;
+    });
 }

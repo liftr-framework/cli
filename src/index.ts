@@ -2,6 +2,7 @@
 import program from 'commander';
 import chalk from 'chalk';
 import { validateCommand } from './validate-command';
+import { getModuleFiles } from './helpers';
 
 const packageJson = require('../package.json');
 const figlet = require('figlet');
