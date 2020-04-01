@@ -4,9 +4,9 @@
     <img alt="Liftr logo" src="./logo.png">
 </p>
 
-[![npmversion](https://img.shields.io/npm/v/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli)
-[![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli/blob/master/LICENSE/)
-[![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/farisT/liftr-cli)
+[![npmversion](https://img.shields.io/npm/v/@liftr/cli.svg?style=for-the-badge)](https://github.com/liftr-framework/cli)
+[![npmlicense](https://img.shields.io/npm/l/@liftr/cli.svg?style=for-the-badge)](https://github.com/liftr-framework/cli/blob/master/LICENSE/)
+[![downloads](https://img.shields.io/npm/dy/liftr.svg?style=for-the-badge)](https://github.com/liftr-framework/cli)
 
 The liftr-cli is a quick project-starter CLI to work with the Liftr framework, it will create the necessary files for you to begin a Node.js & Typescript project. Ontop of that, you can generate new backend components on the fly - providing a quicker way to build structured and robust API's.
 

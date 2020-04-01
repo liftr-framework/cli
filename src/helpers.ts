@@ -1,27 +1,26 @@
 import chalk from 'chalk';
 import { existsSync, stat, writeFile, outputFile } from 'fs-extra';
+import path from 'path';
+import glob from 'glob';
+import fs from 'fs-extra';
+import fastGlob from 'fast-glob';
 
-export const checkName = (name: string|boolean) => {
-    if (typeof name === 'string') return true;
+export const checkLiftrProject =  (componentType: string): boolean =>  {
+    const routingModulepath = '/src/routes/LiftrRoutingModule.ts';
+    if (existsSync(process.cwd() + routingModulepath) || componentType === 'setup') return true;
     else {
-        console.error(chalk.red('Invalid command: No name found after the command'));
-        process.exit(1);
-    }
-};
-
-export const checkLiftrProject =  (): boolean =>  {
-    const path = '/src/routes/LiftrRoutingModule.ts';
-    if (existsSync(process.cwd() + path)) return true;
-    else {
-        console.error(chalk.red('This is not a Liftr project, commands are only available in a Liftr project'));
+        console.error(chalk.red('This is not a Liftr project'));
+        console.error(chalk.red('Only setup can run outside of a Liftr project'));
         return false;
     }
 };
 
-export const folderExists = async (path: string): Promise<boolean> => !!(await stat(path).catch(() => false));
+export const folderExists = async (folderPath: string): Promise<boolean> => {
+  return !!(await stat(folderPath).catch(() => false));
+};
 
 export async function creation(dirpath: string, filePath: string, fileContent: string): Promise<void> {
-    const folderBlackList = [
+    const folderBlackList: string[] = [
         process.cwd() + '/src/middlewares',
         process.cwd() + '/src/routes',
         process.cwd() + '/src/controllers',
@@ -40,4 +39,24 @@ export async function creation(dirpath: string, filePath: string, fileContent: s
             await outputFile(filePath, fileContent);
         } else throw new Error('Folder already exists');
     }
+}
+
+export function loadConfig(componentType: string) {
+  return glob.sync(`${componentType}.?s`, {
+    cwd: path.resolve(`${__dirname}/component-configs`),
+  });
+}
+
+export async function getModuleFiles(): Promise<string[]> {
+  const modules: string[] = await fastGlob(['**'], {
+    cwd: process.cwd() + '/src/routes/',
+  });
+  return modules.filter((name: string) => name
+    .includes('.module'))
+    .map((fileName: string) => {
+      const file = fileName.replace('.module.ts', '');
+      if (file.includes('/')) {
+        return file.split('/')[1];
+      } else return file;
+    });
 }

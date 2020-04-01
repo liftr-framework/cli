@@ -9,10 +9,10 @@ export const addRouteToModule = async (newRouteName: string, targetRouteFile: st
     const position1 = file.indexOf(`= Module([
 `) + 10;
     const output = `
-    {
-        route: ${newRouteName}Route,
-        middleware: [],
-    },
+  {
+    route: ${newRouteName}Route,
+    middleware: [],
+  },
 `;
     const importStatement = `
 import { ${newRouteName}Route } from './${targetRouteFile}.routes';`;

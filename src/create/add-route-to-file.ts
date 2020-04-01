@@ -1,17 +1,26 @@
 import { appendFile, readFile, writeFile } from 'fs-extra';
+import chalk from 'chalk';
 
-export const addRouteToFile = async (newRouteName: string, path: string, flatCheck: boolean) => {
+interface AddRouteToFileParams {
+  name: string;
+  filePath: string;
+  flatFile: boolean;
+  endpointMethod?: string;
+}
+
+export const addRouteToFile = async ({name, filePath, flatFile, endpointMethod}: AddRouteToFileParams) => {
     try {
-        const file: Buffer = await readFile(path);
+        const method = endpointMethod ? endpointMethod : 'get';
+        const file: Buffer = await readFile(filePath);
         const position2 = file.indexOf("import { Route } from '@liftr/core';") + 37;
         let importStatement;
-        if (flatCheck) {
+        if (flatFile) {
             importStatement = `
-import { ${newRouteName}Controller } from '@controllers/${newRouteName}.controller';
+import { ${name}Controller } from '@controllers/${name}.controller';
 `;
         } else {
             importStatement = `
-import { ${newRouteName}Controller } from '@controllers/${newRouteName}/${newRouteName}.controller';
+import { ${name}Controller } from '@controllers/${name}/${name}.controller';
 `;
         }
         const newFile = [
@@ -19,10 +28,11 @@ import { ${newRouteName}Controller } from '@controllers/${newRouteName}/${newRou
             importStatement,
             file.slice(position2)].join('');
         const route = `
-export const ${newRouteName}Route = Route.get('/${newRouteName}', ${newRouteName}Controller);
+export const ${name}Route = Route.${method}('/${name}', ${name}Controller);
     `;
-        await writeFile(path, newFile);
-        await appendFile(path, route);
+        await writeFile(filePath, newFile);
+        await appendFile(filePath, route);
+        console.log(chalk.green(`Liftr ${method} route called ${name}Route created in ${filePath}`));
     } catch (error) {
         console.error('Error:', error);
     }
